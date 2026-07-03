@@ -1,0 +1,1049 @@
+2026-07-02 17:33:51,878 INFO app.routers.chat - POST /chat
+2026-07-02 17:36:38,912 INFO app.services.ollama_service - Calling ollama...
+2026-07-02 17:36:38,912 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-02 17:40:47,569 INFO app.routers.chat - POST /chat
+2026-07-02 17:40:47,569 INFO app.services.ollama_service - Calling ollama...
+2026-07-02 17:40:47,569 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-02 17:41:25,113 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u30d0\\u30fc\\u30ac\\u30fc\\u30ad\\u30f3\\u30b0\\u304c\\u5927\\u597d\\u304d\\u3067\\u3059\\u306d", "stream": false}'
+2026-07-02 17:41:25,114 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-02 17:41:25,115 INFO app.services.ollama_service - Response: バーガーキング、私も大好きです！特にWhopperやDouble Whopperは絶品ですよね～。最近は新商品も出ているので、試してみては？（*´∀`*）  
+お気に入りのバーガーや、おすすめのドリンク・フライスはありますか？ぜひ教えてくださいね！🍔🍟
+2026-07-02 17:42:15,843 INFO app.routers.chat - POST /chat
+2026-07-02 17:42:15,843 INFO app.services.ollama_service - Calling ollama...
+2026-07-02 17:42:15,843 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-02 17:42:59,859 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u6bce\\u9031\\uff12\\u56de\\u98df\\u3079\\u3066\\u308b\\u3088", "stream": false}'
+2026-07-02 17:42:59,860 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-02 17:42:59,860 INFO app.services.ollama_service - Response: 毎週2回食べてるの、どんなものなの？  
+お気に入りの食べ物があるの？  
+もしあったら、どんな料理か教えてくれると嬉しいな！  
+（例：スイーツ？お惣菜？など）  
+もしよければ、その食べ物についてもっと教えてね！ 😊
+2026-07-02 17:43:40,593 INFO app.routers.chat - POST /chat
+2026-07-02 17:43:40,593 INFO app.services.ollama_service - Calling ollama...
+2026-07-02 17:43:40,593 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-02 17:46:46,920 INFO app.routers.chat - POST /chat
+2026-07-02 17:46:46,921 INFO app.services.ollama_service - Calling ollama...
+2026-07-02 17:46:46,921 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-02 17:47:46,063 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u4eca\\u306f\\u6843\\u306e\\u5b63\\u7bc0\\u3067\\u3059\\u306d", "stream": false}'
+2026-07-02 17:47:46,063 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-02 17:47:46,063 INFO app.services.ollama_service - Response: はい、まさに桃の季節ですね！甘くてジューシーな桃は、食欲をそそる食材の一つです。今から旬の桃を味わえるのは、とても幸せなことですよ～🍑✨  
+
+お好みの食べ方や、おすすめのレシピがあれば、ぜひ教えてくださいね！一緒に桃の美味しさを楽しみましょう！🌸
+2026-07-03 09:32:08,870 INFO app.middleware.logging - [789e8219] GET /docs
+2026-07-03 09:32:08,871 INFO app.middleware.logging - [789e8219] Completed in 0.001s
+2026-07-03 09:32:08,959 INFO app.middleware.logging - [d57680c1] GET /openapi.json
+2026-07-03 09:32:08,963 INFO app.middleware.logging - [d57680c1] Completed in 0.004s
+2026-07-03 09:32:35,045 INFO app.middleware.logging - [c2383625] POST /chat/chat
+2026-07-03 09:32:35,048 INFO app.routers.chat - POST /chat
+2026-07-03 09:32:35,048 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 09:32:35,048 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 09:33:07,768 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "how are you", "stream": false}'
+2026-07-03 09:33:07,768 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-03 09:33:07,768 INFO app.services.ollama_service - Response: Hello! I'm just a chatbot, so I don't have feelings, but I'm here and ready to help! How can I assist you today? 😊
+2026-07-03 09:33:07,769 INFO app.middleware.logging - [c2383625] Completed in 32.724s
+2026-07-03 09:46:56,881 INFO app.middleware.logging - [09174979] GET /docs
+2026-07-03 09:46:56,883 INFO app.middleware.logging - [09174979] Completed in 0.002s
+2026-07-03 09:46:57,018 INFO app.middleware.logging - [432de9a9] GET /openapi.json
+2026-07-03 09:46:57,022 INFO app.middleware.logging - [432de9a9] Completed in 0.004s
+2026-07-03 09:55:57,910 INFO app.middleware.logging - [4ee54221] POST /chat/chat
+2026-07-03 09:55:57,914 INFO app.routers.chat - POST /chat
+2026-07-03 09:55:57,914 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 09:55:57,914 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 09:58:35,498 INFO app.middleware.logging - [0f25fd71] POST /chat/chat
+2026-07-03 09:58:35,500 INFO app.routers.chat - POST /chat
+2026-07-03 09:58:35,500 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 09:58:35,500 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 09:58:59,695 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "!!!!", "stream": false}'
+2026-07-03 09:58:59,695 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-03 09:58:59,695 INFO app.services.ollama_service - Response: 您好！看起来您可能想表达一些内容，但信息不太清晰。如果您有任何问题或需要帮助，请随时告诉我，我会尽力为您解答！😊
+2026-07-03 09:58:59,697 INFO app.middleware.logging - [0f25fd71] Completed in 24.199s
+2026-07-03 09:59:34,057 INFO app.middleware.logging - [4ccda7a0] POST /chat/chat
+2026-07-03 09:59:34,058 INFO app.routers.chat - POST /chat
+2026-07-03 09:59:34,058 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 09:59:34,058 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 10:04:34,605 INFO app.middleware.logging - [a2e3adae] GET /docs
+2026-07-03 10:04:34,606 INFO app.middleware.logging - [a2e3adae] Completed in 0.001s
+2026-07-03 10:04:34,713 INFO app.middleware.logging - [7d90cf8d] GET /openapi.json
+2026-07-03 10:04:34,717 INFO app.middleware.logging - [7d90cf8d] Completed in 0.005s
+2026-07-03 11:06:36,531 INFO app.middleware.logging - [fdffc913] GET /docs
+2026-07-03 11:06:36,533 INFO app.middleware.logging - [fdffc913] Completed in 0.001s
+2026-07-03 11:06:36,690 INFO app.middleware.logging - [727473f6] GET /openapi.json
+2026-07-03 11:06:36,697 INFO app.middleware.logging - [727473f6] Completed in 0.007s
+2026-07-03 11:06:56,679 INFO app.middleware.logging - [38350f8d] POST /chat
+2026-07-03 11:06:56,682 INFO app.routers.chat - POST /chat
+2026-07-03 11:06:56,682 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:06:56,683 ERROR app.exceptions.handlers - Unhandled Exception
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/middleware/logging.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2543, in app
+    await route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2598, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 23, in chat
+    raise Exception("Test Exception")
+Exception: Test Exception
+2026-07-03 11:07:10,135 INFO app.middleware.logging - [e4109eb2] POST /chat
+2026-07-03 11:07:10,136 INFO app.routers.chat - POST /chat
+2026-07-03 11:07:10,137 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:07:10,137 ERROR app.exceptions.handlers - Unhandled Exception
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/middleware/logging.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2543, in app
+    await route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2598, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 23, in chat
+    raise Exception("Test Exception")
+Exception: Test Exception
+2026-07-03 11:14:42,838 INFO app.middleware.logging - [d6df189e] POST /chat
+2026-07-03 11:14:42,842 INFO app.routers.chat - POST /chat
+2026-07-03 11:14:42,842 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:14:42,842 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:14:42,845 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/http/client.py", line 1113, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/lib/python3.14/http/client.py", line 1057, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+        self, f"Failed to establish a new connection: {e}"
+    ) from e
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='127.0.0.1', port=11434): Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=11434): Failed to establish a new connection: [Errno 111] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 28, in chat
+    response = requests.post(
+        f"{settings.ollama_url}/api/generate",
+    ...<5 lines>...
+        timeout=120
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=11434): Failed to establish a new connection: [Errno 111] Connection refused"))
+2026-07-03 11:14:42,853 INFO app.middleware.logging - [d6df189e] Completed in 0.015s
+2026-07-03 11:18:49,219 INFO app.middleware.logging - [6090a266] POST /chat
+2026-07-03 11:18:49,223 INFO app.routers.chat - POST /chat
+2026-07-03 11:18:49,224 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:18:49,224 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:18:49,226 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/http/client.py", line 1113, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/lib/python3.14/http/client.py", line 1057, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+        self, f"Failed to establish a new connection: {e}"
+    ) from e
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='127.0.0.1', port=11434): Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=11434): Failed to establish a new connection: [Errno 111] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 28, in chat
+    response = requests.post(
+        f"{settings.ollama_url}/api/generate",
+    ...<5 lines>...
+        timeout=120
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=11434): Failed to establish a new connection: [Errno 111] Connection refused"))
+2026-07-03 11:18:49,234 INFO app.middleware.logging - [6090a266] Completed in 0.014s
+2026-07-03 11:20:01,538 INFO app.middleware.logging - [e5a380ae] POST /chat
+2026-07-03 11:20:01,540 INFO app.routers.chat - POST /chat
+2026-07-03 11:20:01,540 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:20:01,540 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:20:01,543 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "hello", "stream": false}'
+2026-07-03 11:20:01,544 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 42, in chat
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:11434/api/generate
+2026-07-03 11:20:01,546 INFO app.middleware.logging - [e5a380ae] Completed in 0.008s
+2026-07-03 11:20:04,030 INFO app.middleware.logging - [09a65963] POST /chat
+2026-07-03 11:20:04,031 INFO app.routers.chat - POST /chat
+2026-07-03 11:20:04,031 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:20:04,032 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:20:04,034 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "hello", "stream": false}'
+2026-07-03 11:20:04,035 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 42, in chat
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:11434/api/generate
+2026-07-03 11:20:04,036 INFO app.middleware.logging - [09a65963] Completed in 0.007s
+2026-07-03 11:20:04,701 INFO app.middleware.logging - [0c941c3d] POST /chat
+2026-07-03 11:20:04,702 INFO app.routers.chat - POST /chat
+2026-07-03 11:20:04,703 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:20:04,703 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:20:04,705 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "hello", "stream": false}'
+2026-07-03 11:20:04,705 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 42, in chat
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:11434/api/generate
+2026-07-03 11:20:04,707 INFO app.middleware.logging - [0c941c3d] Completed in 0.006s
+2026-07-03 11:20:26,148 INFO app.middleware.logging - [f1b9cb92] POST /chat
+2026-07-03 11:20:26,149 INFO app.routers.chat - POST /chat
+2026-07-03 11:20:26,150 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:20:26,150 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:20:26,152 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "hello", "stream": false}'
+2026-07-03 11:20:26,152 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 42, in chat
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:11434/api/generate
+2026-07-03 11:20:26,154 INFO app.middleware.logging - [f1b9cb92] Completed in 0.006s
+2026-07-03 11:20:30,348 INFO app.middleware.logging - [a42c1944] GET /docs
+2026-07-03 11:20:30,348 INFO app.middleware.logging - [a42c1944] Completed in 0.001s
+2026-07-03 11:20:30,439 INFO app.middleware.logging - [5179e374] GET /openapi.json
+2026-07-03 11:20:30,456 INFO app.middleware.logging - [5179e374] Completed in 0.017s
+2026-07-03 11:20:42,146 INFO app.middleware.logging - [28e0dd62] POST /chat
+2026-07-03 11:20:42,147 INFO app.routers.chat - POST /chat
+2026-07-03 11:20:42,147 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:20:42,147 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:20:42,167 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "hello", "stream": false}'
+2026-07-03 11:20:42,168 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 42, in chat
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:11434/api/generate
+2026-07-03 11:20:42,170 INFO app.middleware.logging - [28e0dd62] Completed in 0.024s
+2026-07-03 11:22:25,069 INFO app.middleware.logging - [51598d90] GET /docs
+2026-07-03 11:22:25,070 INFO app.middleware.logging - [51598d90] Completed in 0.001s
+2026-07-03 11:22:25,150 INFO app.middleware.logging - [cd10d956] GET /openapi.json
+2026-07-03 11:22:25,154 INFO app.middleware.logging - [cd10d956] Completed in 0.005s
+2026-07-03 11:22:34,099 INFO app.middleware.logging - [d20cfb58] GET /health
+2026-07-03 11:22:34,101 INFO app.middleware.logging - [d20cfb58] Completed in 0.003s
+2026-07-03 11:22:46,219 INFO app.middleware.logging - [b770f6b7] POST /chat
+2026-07-03 11:22:46,239 INFO app.routers.chat - POST /chat
+2026-07-03 11:22:46,239 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:22:46,239 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:22:46,243 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "hello", "stream": false}'
+2026-07-03 11:22:46,243 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 42, in chat
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:11434/api/generate
+2026-07-03 11:22:46,247 INFO app.middleware.logging - [b770f6b7] Completed in 0.028s
+2026-07-03 11:22:49,969 INFO app.middleware.logging - [5d355ab4] POST /chat
+2026-07-03 11:22:49,970 INFO app.routers.chat - POST /chat
+2026-07-03 11:22:49,971 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:22:49,971 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:22:49,973 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "hello", "stream": false}'
+2026-07-03 11:22:49,974 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 42, in chat
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:11434/api/generate
+2026-07-03 11:22:49,975 INFO app.middleware.logging - [5d355ab4] Completed in 0.006s
+2026-07-03 11:22:50,695 INFO app.middleware.logging - [bc6737cb] POST /chat
+2026-07-03 11:22:50,696 INFO app.routers.chat - POST /chat
+2026-07-03 11:22:50,696 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:22:50,696 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:22:50,698 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "hello", "stream": false}'
+2026-07-03 11:22:50,698 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 42, in chat
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:11434/api/generate
+2026-07-03 11:22:50,700 INFO app.middleware.logging - [bc6737cb] Completed in 0.005s
+2026-07-03 11:32:43,964 INFO app.middleware.logging - [be28ad6b] POST /chat
+2026-07-03 11:32:43,968 INFO app.routers.chat - POST /chat
+2026-07-03 11:32:43,968 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:32:43,968 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:33:07,064 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.14/http/client.py", line 1450, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 336, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 305, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+                             " response")
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.14/http/client.py", line 1450, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 336, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 305, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+                             " response")
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 30, in chat
+    return service.chat(request.message)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 28, in chat
+    response = requests.post(
+        f"{settings.ollama_url}/api/generate",
+    ...<5 lines>...
+        timeout=120
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/adapters.py", line 711, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-07-03 11:33:07,078 INFO app.middleware.logging - [be28ad6b] Completed in 23.114s
+2026-07-03 11:33:40,051 INFO app.middleware.logging - [a0bfaee6] POST /chat
+2026-07-03 11:33:40,053 INFO app.routers.chat - POST /chat
+2026-07-03 11:33:40,053 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 11:33:40,053 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 11:34:11,468 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "hello", "stream": false}'
+2026-07-03 11:34:11,468 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-03 11:34:11,468 INFO app.services.ollama_service - Response: Hello! 😊 How can I assist you today? If you have any questions or need help with something, feel free to let me know!
+2026-07-03 11:34:11,471 INFO app.middleware.logging - [a0bfaee6] Completed in 31.421s
+2026-07-03 12:01:05,178 INFO app.middleware.logging - [2fa4287e] GET /docs
+2026-07-03 12:01:05,179 INFO app.middleware.logging - [2fa4287e] Completed in 0.001s
+2026-07-03 12:01:05,258 INFO app.middleware.logging - [4f63d0b2] GET /openapi.json
+2026-07-03 12:01:05,265 INFO app.middleware.logging - [4f63d0b2] Completed in 0.007s
+2026-07-03 12:01:13,074 INFO app.middleware.logging - [dc87e437] GET /models
+2026-07-03 12:01:13,081 INFO app.services.ollama_service - Available Models5: ['qwen3:8b']
+2026-07-03 12:01:13,082 INFO app.middleware.logging - [dc87e437] Completed in 0.008s
+2026-07-03 13:25:12,976 INFO app.middleware.logging - [4eaafefd] GET /docs
+2026-07-03 13:25:12,977 INFO app.middleware.logging - [4eaafefd] Completed in 0.001s
+2026-07-03 13:25:13,121 INFO app.middleware.logging - [df92c9ab] GET /openapi.json
+2026-07-03 13:25:13,122 INFO app.middleware.logging - [df92c9ab] Completed in 0.001s
+2026-07-03 14:24:30,435 INFO app.middleware.logging - [18284238] GET /docs
+2026-07-03 14:24:30,436 INFO app.middleware.logging - [7f7011bc] GET /docs
+2026-07-03 14:24:30,436 INFO app.middleware.logging - [7f7011bc] Completed in 0.000s
+2026-07-03 14:24:30,436 INFO app.middleware.logging - [18284238] Completed in 0.002s
+2026-07-03 14:24:30,514 INFO app.middleware.logging - [8977d094] GET /openapi.json
+2026-07-03 14:24:30,515 INFO app.middleware.logging - [bcfec97a] GET /openapi.json
+2026-07-03 14:24:30,519 INFO app.middleware.logging - [bcfec97a] Completed in 0.005s
+2026-07-03 14:24:30,520 INFO app.middleware.logging - [8977d094] Completed in 0.005s
+2026-07-03 14:24:31,502 INFO app.middleware.logging - [315d453d] GET /
+2026-07-03 14:24:31,503 INFO app.middleware.logging - [1e7a5e91] GET /
+2026-07-03 14:24:31,504 INFO app.middleware.logging - [1e7a5e91] Completed in 0.002s
+2026-07-03 14:24:31,504 INFO app.middleware.logging - [315d453d] Completed in 0.002s
+2026-07-03 14:24:37,544 INFO app.middleware.logging - [93647511] GET /docs
+2026-07-03 14:24:37,544 INFO app.middleware.logging - [6fbe0355] GET /docs
+2026-07-03 14:24:37,545 INFO app.middleware.logging - [6fbe0355] Completed in 0.000s
+2026-07-03 14:24:37,545 INFO app.middleware.logging - [93647511] Completed in 0.001s
+2026-07-03 14:24:37,661 INFO app.middleware.logging - [a8a7056b] GET /openapi.json
+2026-07-03 14:24:37,662 INFO app.middleware.logging - [1801bbcf] GET /openapi.json
+2026-07-03 14:24:37,662 INFO app.middleware.logging - [1801bbcf] Completed in 0.000s
+2026-07-03 14:24:37,663 INFO app.middleware.logging - [a8a7056b] Completed in 0.001s
+2026-07-03 14:42:37,034 INFO app.middleware.logging - [9d3c6525] GET /docs
+2026-07-03 14:42:37,035 INFO app.middleware.logging - [9d3c6525] Completed in 0.002s
+2026-07-03 14:42:37,194 INFO app.middleware.logging - [8ecaa48b] GET /openapi.json
+2026-07-03 14:42:37,199 INFO app.middleware.logging - [8ecaa48b] Completed in 0.005s
+2026-07-03 14:43:01,870 INFO app.middleware.logging - [463c78ba] GET /docs
+2026-07-03 14:43:01,871 INFO app.middleware.logging - [463c78ba] Completed in 0.001s
+2026-07-03 14:43:01,947 INFO app.middleware.logging - [80ed2ecd] GET /openapi.json
+2026-07-03 14:43:01,948 INFO app.middleware.logging - [80ed2ecd] Completed in 0.001s
+2026-07-03 14:43:04,517 INFO app.middleware.logging - [1795f8e4] GET /docs
+2026-07-03 14:43:04,518 INFO app.middleware.logging - [1795f8e4] Completed in 0.001s
+2026-07-03 14:43:04,584 INFO app.middleware.logging - [535e8f03] GET /openapi.json
+2026-07-03 14:43:04,585 INFO app.middleware.logging - [535e8f03] Completed in 0.001s
+2026-07-03 15:04:43,097 INFO app.middleware.logging - [2f2ee7cc] GET /docs
+2026-07-03 15:04:43,098 INFO app.middleware.logging - [2f2ee7cc] Completed in 0.001s
+2026-07-03 15:04:43,185 INFO app.middleware.logging - [7722a454] GET /openapi.json
+2026-07-03 15:04:43,191 INFO app.middleware.logging - [7722a454] Completed in 0.006s
+2026-07-03 15:05:09,979 INFO app.middleware.logging - [4669f69c] POST /chat
+2026-07-03 15:05:09,981 INFO app.routers.chat - POST /chat
+2026-07-03 15:05:09,982 INFO app.services.ollama_service - Calling ollama...
+2026-07-03 15:05:09,982 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-03 15:06:17,179 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "kamusta ka", "stream": false}'
+2026-07-03 15:06:17,179 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-03 15:06:17,179 INFO app.services.ollama_service - Response: Kamusta ka din! 😊  
+(You're good too! / How are you? 😊)  
+
+Pwede naman ako mag-English o mag-Filipino, depende sa gusto mo! 🇵🇭✨
+2026-07-03 15:06:17,181 INFO app.middleware.logging - [4669f69c] Completed in 67.202s
