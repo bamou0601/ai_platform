@@ -1,6 +1,6 @@
 # AI Platform
 
-ローカル環境で動作するシンプルな AI プラットフォーム API です。FastAPI を用いて、健康チェックとチャット応答のエンドポイントを提供します。
+ローカル環境で動作するシンプルな AI プラットフォーム API です。FastAPI を用いて、健康チェック、チャット応答、利用可能モデル一覧取得のエンドポイントを提供します。
 
 ## 概要
 
@@ -8,7 +8,11 @@
 
 - ヘルスチェック API
 - チャット送信 API
+- モデル一覧取得 API
 - Ollama サービスとの連携
+- リクエストログ記録ミドルウェア
+- 例外ハンドリング
+- CORS 設定
 
 ## ディレクトリ構成
 
@@ -22,11 +26,19 @@ ai_platform/
     └── app/
         ├── main.py
         ├── config.py
+        ├── core/
+        │   └── logging.py
+        ├── exceptions/
+        │   └── handlers.py
+        ├── middleware/
+        │   └── logging.py
         ├── routers/
         │   ├── chat.py
-        │   └── health.py
+        │   ├── health.py
+        │   └── models.py
         ├── schemas/
-        │   └── chat.py
+        │   ├── chat.py
+        │   └── models.py
         └── services/
             └── ollama_service.py
 ```
@@ -58,7 +70,18 @@ uvicorn app.main:app --reload
 - http://127.0.0.1:8000/
 - http://127.0.0.1:8000/health
 - http://127.0.0.1:8000/chat
+- http://127.0.0.1:8000/models
 - http://127.0.0.1:8000/docs
+
+## 環境変数
+
+`.env` ファイルに以下の値を設定してください。
+
+```env
+OLLAMA_URL=http://localhost:11434
+OLLAMA_MODEL=your-default-model-name
+ALLOW_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+```
 
 ## API エンドポイント
 
@@ -95,7 +118,19 @@ uvicorn app.main:app --reload
 
 ```json
 {
-  "answer": "君のメッセージは「こんにちは」です。"
+  "answer": "..."
+}
+```
+
+### GET /models
+
+Ollama サービスから利用可能なモデル一覧を取得します。
+
+レスポンス例:
+
+```json
+{
+  "models": ["llama2", "gpt-4", "custom-model"]
 }
 ```
 
