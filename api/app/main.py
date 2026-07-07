@@ -16,6 +16,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers.health import router as health_router
 from app.routers.chat import router as chat_router
 from app.routers.models import router as models_router
+from app.routers.users import router as users_router
+
+# FastAPIを起動時にテーブルを作成する
+from app.db.init_db import init_db
 
 # ログの設定を初期化
 setup_logger()
@@ -69,7 +73,12 @@ def root():
         "message": "AI Platform is running"
     }
 
+@app.on_event("startup")
+def startup():
+    init_db()
+
 # 各ルーターをアプリケーションへ登録
 app.include_router(health_router)
 app.include_router(chat_router)
 app.include_router(models_router)
+app.include_router(users_router)

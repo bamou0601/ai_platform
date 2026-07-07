@@ -7,10 +7,11 @@
 
 from pydantic import BaseModel
 
-# チャットリクエストの入力データ構造
+
 class ChatRequest(BaseModel):
+    """チャットリクエストの入力データ構造""" 
     message: str
 
-# チャットレスポンスの出力データ構造
 class ChatResponse(BaseModel):
+    """チャットレスポンスの出力データ構造"""
     answer: str
