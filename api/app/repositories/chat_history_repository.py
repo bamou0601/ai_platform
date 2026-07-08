@@ -32,7 +32,7 @@ class ChatHistoryRepository:
 
         db.add(db_chat)
         db.commit()
-        db.refresh()
+        db.refresh(db_chat)
 
         return db_chat
     
@@ -105,4 +105,4 @@ class ChatHistoryRepository:
 
         return True
     
-    
+

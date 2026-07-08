@@ -5,10 +5,16 @@
 # 作成日: 2026/07/2
 # """
 
-from fastapi import APIRouter
-from app.schemas.chat import ChatRequest, ChatResponse
-from app.services.ollama_service import OllamaService
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 import logging
+
+from app.db.dependencies import get_db
+from app.schemas.chat import ChatRequest, ChatResponse
+from app.services.chat_service import ChatService
+#from sqlalchemy.orm import Session
+
+
 
 # ログの設定を初期化
 logger = logging.getLogger(__name__)
@@ -20,11 +26,14 @@ router = APIRouter(
 )
 
 # Ollama サービスの共有インスタンス
-service = OllamaService()
+service = ChatService()
 
 # チャット送信用のエンドポイント
 @router.post("", response_model=ChatResponse)
-def chat(request: ChatRequest):
+def chat(
+    request: ChatRequest,
+    db: Session = Depends(get_db)
+    ):
     """受け取ったメッセージをサービスに渡して応答を返す"""
     logger.info("POST /chat")
-    return service.chat(request.message)
+    return service.chat(db, request)

@@ -3388,3 +3388,828 @@ WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relki
 2026-07-07 17:51:35,071 INFO app.middleware.logging - [60739681] Completed in 0.001s
 2026-07-07 17:51:35,353 INFO app.middleware.logging - [7847de25] GET /openapi.json
 2026-07-07 17:51:35,388 INFO app.middleware.logging - [7847de25] Completed in 0.035s
+2026-07-07 18:05:52,663 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-07 18:05:52,664 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-07 18:05:52,666 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-07 18:05:52,666 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-07 18:05:52,667 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-07 18:05:52,667 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-07 18:05:52,668 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-07 18:05:52,673 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-07 18:05:52,674 INFO sqlalchemy.engine.Engine - [generated in 0.00098s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-07 18:05:52,676 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-07 18:05:52,677 INFO sqlalchemy.engine.Engine - [cached since 0.003965s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-07 18:05:52,678 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-07 18:06:00,565 INFO app.middleware.logging - [6784cfd4] GET /docs
+2026-07-07 18:06:00,568 INFO app.middleware.logging - [6784cfd4] Completed in 0.003s
+2026-07-07 18:06:00,786 INFO app.middleware.logging - [149296eb] GET /openapi.json
+2026-07-07 18:06:00,818 INFO app.middleware.logging - [149296eb] Completed in 0.031s
+2026-07-07 18:06:07,786 INFO app.middleware.logging - [38e1ecf1] POST /chat-history
+2026-07-07 18:06:07,812 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-07 18:06:07,815 INFO sqlalchemy.engine.Engine - INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id
+2026-07-07 18:06:07,815 INFO sqlalchemy.engine.Engine - [generated in 0.00045s] {'user_id': 1, 'question': '今日はどうですか', 'answer': '素晴らしい', 'model': 'qwen3-8b', 'created_at': datetime.datetime(2026, 7, 7, 9, 6, 7, 815435)}
+2026-07-07 18:06:07,833 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-07 18:06:07,838 ERROR app.exceptions.handlers - Unhandled Exception
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "chat_history" violates foreign key constraint "chat_history_user_id_fkey"
+DETAIL:  Key (user_id)=(1) is not present in table "users".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/middleware/logging.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2543, in app
+    await route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2598, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat_history.py", line 42, in create_chat
+    return service.create_chat(
+           ~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        chat
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/chat_history_service.py", line 32, in create_chat
+    return self.repository.create(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        chat
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/repositories/chat_history_repository.py", line 34, in create
+    db.commit()
+    ~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1316, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1290, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 465, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 641, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 94, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 1234, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.ForeignKeyViolation) insert or update on table "chat_history" violates foreign key constraint "chat_history_user_id_fkey"
+DETAIL:  Key (user_id)=(1) is not present in table "users".
+
+[SQL: INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id]
+[parameters: {'user_id': 1, 'question': '今日はどうですか', 'answer': '素晴らしい', 'model': 'qwen3-8b', 'created_at': datetime.datetime(2026, 7, 7, 9, 6, 7, 815435)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-07-08 08:53:27,296 INFO app.middleware.logging - [bf90d3e9] GET /docs
+2026-07-08 08:53:27,298 INFO app.middleware.logging - [bf90d3e9] Completed in 0.002s
+2026-07-08 08:53:27,461 INFO app.middleware.logging - [375944b0] GET /openapi.json
+2026-07-08 08:53:27,462 INFO app.middleware.logging - [375944b0] Completed in 0.001s
+2026-07-08 09:07:16,870 INFO app.middleware.logging - [ab8f431b] POST /chat-history
+2026-07-08 09:07:16,872 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:07:16,873 INFO sqlalchemy.engine.Engine - INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id
+2026-07-08 09:07:16,873 INFO sqlalchemy.engine.Engine - [cached since 4603s ago] {'user_id': 3, 'question': 'こんにちは', 'answer': 'こんにちは、何か手伝いできますか', 'model': 'qwen3-8b', 'created_at': datetime.datetime(2026, 7, 8, 0, 7, 16, 873164)}
+2026-07-08 09:07:16,876 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 09:07:16,879 ERROR app.exceptions.handlers - Unhandled Exception
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/middleware/logging.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2543, in app
+    await route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2598, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat_history.py", line 42, in create_chat
+    return service.create_chat(
+           ~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        chat
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/chat_history_service.py", line 32, in create_chat
+    return self.repository.create(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        chat
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/repositories/chat_history_repository.py", line 35, in create
+    db.refresh()
+    ~~~~~~~~~~^^
+TypeError: Session.refresh() missing 1 required positional argument: 'instance'
+2026-07-08 09:31:38,134 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 09:31:38,135 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 09:31:38,136 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 09:31:38,136 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 09:31:38,138 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 09:31:38,138 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 09:31:38,140 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:31:38,144 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 09:31:38,144 INFO sqlalchemy.engine.Engine - [generated in 0.00035s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 09:31:38,147 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 09:31:38,147 INFO sqlalchemy.engine.Engine - [cached since 0.003184s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 09:31:38,148 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 09:32:44,594 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 09:32:44,594 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 09:32:44,595 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 09:32:44,596 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 09:32:44,596 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 09:32:44,597 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 09:32:44,597 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:32:44,601 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 09:32:44,601 INFO sqlalchemy.engine.Engine - [generated in 0.00025s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 09:32:44,603 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 09:32:44,604 INFO sqlalchemy.engine.Engine - [cached since 0.00354s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 09:32:44,606 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 09:32:53,088 INFO app.middleware.logging - [732e9278] POST /chat-history
+2026-07-08 09:32:53,097 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:32:53,099 INFO sqlalchemy.engine.Engine - INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id
+2026-07-08 09:32:53,099 INFO sqlalchemy.engine.Engine - [generated in 0.00025s] {'user_id': 3, 'question': 'こんにちは', 'answer': 'こんにちは、何か手伝いできますか', 'model': 'qwen3-8b', 'created_at': datetime.datetime(2026, 7, 8, 0, 32, 53, 99007)}
+2026-07-08 09:32:53,102 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 09:32:53,104 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:32:53,106 INFO sqlalchemy.engine.Engine - SELECT chat_history.id, chat_history.user_id, chat_history.question, chat_history.answer, chat_history.model, chat_history.created_at 
+FROM chat_history 
+WHERE chat_history.id = %(pk_1)s
+2026-07-08 09:32:53,106 INFO sqlalchemy.engine.Engine - [generated in 0.00026s] {'pk_1': 3}
+2026-07-08 09:32:53,109 INFO app.middleware.logging - [732e9278] Completed in 0.021s
+2026-07-08 09:32:53,110 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 09:35:40,046 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 09:35:40,047 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 09:35:40,048 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 09:35:40,048 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 09:35:40,049 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 09:35:40,049 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 09:35:40,050 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:35:40,053 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 09:35:40,053 INFO sqlalchemy.engine.Engine - [generated in 0.00039s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 09:35:40,055 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 09:35:40,056 INFO sqlalchemy.engine.Engine - [cached since 0.002658s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 09:35:40,057 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 09:35:59,572 INFO app.middleware.logging - [0a306f4c] GET /chat-history/2
+2026-07-08 09:35:59,580 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:35:59,581 INFO sqlalchemy.engine.Engine - SELECT chat_history.id AS chat_history_id, chat_history.user_id AS chat_history_user_id, chat_history.question AS chat_history_question, chat_history.answer AS chat_history_answer, chat_history.model AS chat_history_model, chat_history.created_at AS chat_history_created_at 
+FROM chat_history 
+WHERE chat_history.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-07-08 09:35:59,581 INFO sqlalchemy.engine.Engine - [generated in 0.00018s] {'id_1': 2, 'param_1': 1}
+2026-07-08 09:35:59,584 INFO app.middleware.logging - [0a306f4c] Completed in 0.012s
+2026-07-08 09:35:59,585 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 09:36:04,347 INFO app.middleware.logging - [7d91654e] GET /chat-history/3
+2026-07-08 09:36:04,349 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:36:04,349 INFO sqlalchemy.engine.Engine - SELECT chat_history.id AS chat_history_id, chat_history.user_id AS chat_history_user_id, chat_history.question AS chat_history_question, chat_history.answer AS chat_history_answer, chat_history.model AS chat_history_model, chat_history.created_at AS chat_history_created_at 
+FROM chat_history 
+WHERE chat_history.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-07-08 09:36:04,349 INFO sqlalchemy.engine.Engine - [cached since 4.77s ago] {'id_1': 3, 'param_1': 1}
+2026-07-08 09:36:04,352 INFO app.middleware.logging - [7d91654e] Completed in 0.005s
+2026-07-08 09:36:04,353 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 09:37:00,646 INFO app.middleware.logging - [457839ae] PUT /chat-history/2
+2026-07-08 09:37:00,649 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:37:00,649 INFO sqlalchemy.engine.Engine - SELECT chat_history.id AS chat_history_id, chat_history.user_id AS chat_history_user_id, chat_history.question AS chat_history_question, chat_history.answer AS chat_history_answer, chat_history.model AS chat_history_model, chat_history.created_at AS chat_history_created_at 
+FROM chat_history 
+WHERE chat_history.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-07-08 09:37:00,649 INFO sqlalchemy.engine.Engine - [cached since 61.07s ago] {'id_1': 2, 'param_1': 1}
+2026-07-08 09:37:00,652 INFO sqlalchemy.engine.Engine - UPDATE chat_history SET question=%(question)s, answer=%(answer)s WHERE chat_history.id = %(chat_history_id)s
+2026-07-08 09:37:00,652 INFO sqlalchemy.engine.Engine - [generated in 0.00030s] {'question': 'hello', 'answer': 'hello! how are you ,how`s your day going', 'chat_history_id': 2}
+2026-07-08 09:37:00,654 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 09:37:00,658 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:37:00,659 INFO sqlalchemy.engine.Engine - SELECT chat_history.id, chat_history.user_id, chat_history.question, chat_history.answer, chat_history.model, chat_history.created_at 
+FROM chat_history 
+WHERE chat_history.id = %(pk_1)s
+2026-07-08 09:37:00,660 INFO sqlalchemy.engine.Engine - [generated in 0.00033s] {'pk_1': 2}
+2026-07-08 09:37:00,661 INFO app.middleware.logging - [457839ae] Completed in 0.015s
+2026-07-08 09:37:00,662 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 09:37:38,309 INFO app.middleware.logging - [d39e0990] GET /chat-history
+2026-07-08 09:37:38,311 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:37:38,312 INFO sqlalchemy.engine.Engine - SELECT chat_history.id AS chat_history_id, chat_history.user_id AS chat_history_user_id, chat_history.question AS chat_history_question, chat_history.answer AS chat_history_answer, chat_history.model AS chat_history_model, chat_history.created_at AS chat_history_created_at 
+FROM chat_history
+2026-07-08 09:37:38,313 INFO sqlalchemy.engine.Engine - [generated in 0.00038s] {}
+2026-07-08 09:37:38,316 INFO app.middleware.logging - [d39e0990] Completed in 0.007s
+2026-07-08 09:37:38,317 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 09:38:54,025 INFO app.middleware.logging - [9456b9c1] POST /chat-history
+2026-07-08 09:38:54,028 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:38:54,030 INFO sqlalchemy.engine.Engine - INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id
+2026-07-08 09:38:54,031 INFO sqlalchemy.engine.Engine - [generated in 0.00041s] {'user_id': 4, 'question': '今日の天気がいいですね', 'answer': 'そうですね、何か遊ぶ予定がありますか', 'model': 'qwen3-8b', 'created_at': datetime.datetime(2026, 7, 8, 0, 38, 54, 30868)}
+2026-07-08 09:38:54,034 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 09:38:54,041 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:38:54,041 INFO sqlalchemy.engine.Engine - SELECT chat_history.id, chat_history.user_id, chat_history.question, chat_history.answer, chat_history.model, chat_history.created_at 
+FROM chat_history 
+WHERE chat_history.id = %(pk_1)s
+2026-07-08 09:38:54,041 INFO sqlalchemy.engine.Engine - [cached since 113.4s ago] {'pk_1': 4}
+2026-07-08 09:38:54,044 INFO app.middleware.logging - [9456b9c1] Completed in 0.018s
+2026-07-08 09:38:54,044 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 09:39:14,861 INFO app.middleware.logging - [e702d9e6] GET /chat-history
+2026-07-08 09:39:14,863 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:39:14,863 INFO sqlalchemy.engine.Engine - SELECT chat_history.id AS chat_history_id, chat_history.user_id AS chat_history_user_id, chat_history.question AS chat_history_question, chat_history.answer AS chat_history_answer, chat_history.model AS chat_history_model, chat_history.created_at AS chat_history_created_at 
+FROM chat_history
+2026-07-08 09:39:14,863 INFO sqlalchemy.engine.Engine - [cached since 96.56s ago] {}
+2026-07-08 09:39:14,865 INFO app.middleware.logging - [e702d9e6] Completed in 0.004s
+2026-07-08 09:39:14,866 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 09:59:05,678 INFO app.middleware.logging - [cb02905b] DELETE /users/4
+2026-07-08 09:59:05,682 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 09:59:05,683 INFO sqlalchemy.engine.Engine - SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-07-08 09:59:05,684 INFO sqlalchemy.engine.Engine - [generated in 0.00034s] {'id_1': 4, 'param_1': 1}
+2026-07-08 09:59:05,687 INFO sqlalchemy.engine.Engine - DELETE FROM users WHERE users.id = %(id)s
+2026-07-08 09:59:05,687 INFO sqlalchemy.engine.Engine - [generated in 0.00047s] {'id': 4}
+2026-07-08 09:59:05,689 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 09:59:05,691 ERROR app.exceptions.handlers - Unhandled Exception
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: update or delete on table "users" violates foreign key constraint "chat_history_user_id_fkey" on table "chat_history"
+DETAIL:  Key (id)=(4) is still referenced from table "chat_history".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/middleware/logging.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2543, in app
+    await route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2598, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/users.py", line 88, in delete_user
+    success = service.delete_user(
+        db,
+        user_id
+    )
+  File "/home/mo_ba/projects/ai_platform/api/app/services/user_service.py", line 67, in delete_user
+    return self.repository.delete_user(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        user_id
+        ^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/repositories/user_repository.py", line 103, in delete_user
+    db.commit()
+    ~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1316, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1290, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 465, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 678, in execute
+    util.preloaded.orm_persistence.delete_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, True, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 194, in delete_obj
+    _emit_delete_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        delete,
+        ^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 1472, in _emit_delete_statements
+    c = connection.execute(
+        statement, del_objects, execution_options=execution_options
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.ForeignKeyViolation) update or delete on table "users" violates foreign key constraint "chat_history_user_id_fkey" on table "chat_history"
+DETAIL:  Key (id)=(4) is still referenced from table "chat_history".
+
+[SQL: DELETE FROM users WHERE users.id = %(id)s]
+[parameters: {'id': 4}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-07-08 10:02:01,214 INFO app.middleware.logging - [4a934c13] DELETE /chat-history/4
+2026-07-08 10:02:01,217 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 10:02:01,218 INFO sqlalchemy.engine.Engine - SELECT chat_history.id AS chat_history_id, chat_history.user_id AS chat_history_user_id, chat_history.question AS chat_history_question, chat_history.answer AS chat_history_answer, chat_history.model AS chat_history_model, chat_history.created_at AS chat_history_created_at 
+FROM chat_history 
+WHERE chat_history.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-07-08 10:02:01,218 INFO sqlalchemy.engine.Engine - [cached since 1537s ago] {'id_1': 4, 'param_1': 1}
+2026-07-08 10:02:01,220 INFO sqlalchemy.engine.Engine - DELETE FROM chat_history WHERE chat_history.id = %(id)s
+2026-07-08 10:02:01,220 INFO sqlalchemy.engine.Engine - [generated in 0.00030s] {'id': 4}
+2026-07-08 10:02:01,222 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 10:02:01,235 INFO app.middleware.logging - [4a934c13] Completed in 0.022s
+2026-07-08 10:37:42,902 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 10:37:42,902 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 10:37:42,904 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 10:37:42,904 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 10:37:42,905 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 10:37:42,906 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 10:37:42,908 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 10:37:42,913 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 10:37:42,914 INFO sqlalchemy.engine.Engine - [generated in 0.00057s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 10:37:42,917 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 10:37:42,917 INFO sqlalchemy.engine.Engine - [cached since 0.004266s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 10:37:42,918 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 10:38:29,750 INFO app.middleware.logging - [147b56d9] GET /docs
+2026-07-08 10:38:29,751 INFO app.middleware.logging - [147b56d9] Completed in 0.001s
+2026-07-08 10:38:29,847 INFO app.middleware.logging - [dbae0ebf] GET /openapi.json
+2026-07-08 10:38:29,866 INFO app.middleware.logging - [dbae0ebf] Completed in 0.019s
+2026-07-08 10:38:45,780 INFO app.middleware.logging - [34ab2ad9] GET /health
+2026-07-08 10:38:45,801 INFO app.middleware.logging - [34ab2ad9] Completed in 0.021s
+2026-07-08 10:39:01,802 INFO app.middleware.logging - [88a2c625] POST /chat
+2026-07-08 10:39:01,804 INFO app.routers.chat - POST /chat
+2026-07-08 10:39:01,805 INFO app.services.ollama_service - Calling ollama...
+2026-07-08 10:39:01,805 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-08 10:39:49,277 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u304a\\u306f\\u3088\\u3046\\u3054\\u3056\\u3044\\u307e\\u3059", "stream": false}'
+2026-07-08 10:39:49,278 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-08 10:39:49,278 INFO app.services.ollama_service - Response: おはようございます！  
+今日も一日がんばりましょう！  
+何かお手伝いできることがあれば、いつでも言ってくださいね！ 😊
+2026-07-08 10:39:49,279 INFO app.middleware.logging - [88a2c625] Completed in 47.478s
+2026-07-08 10:48:35,823 INFO app.middleware.logging - [b9634b57] GET /openapi.json
+2026-07-08 10:48:35,824 INFO app.middleware.logging - [b9634b57] Completed in 0.001s
+2026-07-08 10:48:39,657 INFO app.middleware.logging - [7235c5d7] GET /docs
+2026-07-08 10:48:39,658 INFO app.middleware.logging - [7235c5d7] Completed in 0.001s
+2026-07-08 10:48:39,737 INFO app.middleware.logging - [07b9f122] GET /openapi.json
+2026-07-08 10:48:39,738 INFO app.middleware.logging - [07b9f122] Completed in 0.001s
+2026-07-08 10:54:19,403 INFO app.middleware.logging - [630d1e9e] POST /chat
+2026-07-08 10:54:19,408 INFO app.routers.chat - POST /chat
+2026-07-08 10:54:19,408 INFO app.services.ollama_service - Calling ollama...
+2026-07-08 10:54:19,409 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-08 10:55:09,004 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u4eca\\u65e5\\u306e\\u5929\\u6c17\\u306f\\u3069\\u3046\\u3067\\u3059\\u304b", "stream": false}'
+2026-07-08 10:55:09,005 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-08 10:55:09,005 INFO app.services.ollama_service - Response: ごめんね、あなたの場所がわかりません。どの地域の天気を知りたいのか教えてくださいね！
+2026-07-08 10:55:09,008 INFO app.middleware.logging - [630d1e9e] Completed in 49.605s
+2026-07-08 11:02:59,849 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 11:02:59,850 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 11:02:59,851 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 11:02:59,852 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 11:02:59,854 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 11:02:59,855 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 11:02:59,857 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 11:02:59,861 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 11:02:59,861 INFO sqlalchemy.engine.Engine - [generated in 0.00051s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 11:02:59,864 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 11:02:59,865 INFO sqlalchemy.engine.Engine - [cached since 0.004247s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 11:02:59,866 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 11:03:03,449 INFO app.middleware.logging - [b6f18d5f] GET /docs
+2026-07-08 11:03:03,450 INFO app.middleware.logging - [b6f18d5f] Completed in 0.001s
+2026-07-08 11:03:03,539 INFO app.middleware.logging - [dd06bb04] GET /openapi.json
+2026-07-08 11:03:03,559 INFO app.middleware.logging - [dd06bb04] Completed in 0.019s
+2026-07-08 11:03:31,089 INFO app.middleware.logging - [ce5771cc] POST /chat
+2026-07-08 11:03:31,092 INFO app.routers.chat - POST /chat
+2026-07-08 11:03:31,093 INFO app.services.ollama_service - Calling ollama...
+2026-07-08 11:03:31,093 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-08 11:03:57,047 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u304a\\u306f\\u3088\\u3046\\u3054\\u3056\\u3044\\u307e\\u3059", "stream": false}'
+2026-07-08 11:03:57,047 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-08 11:03:57,047 INFO app.services.ollama_service - Response: おはようございます！🌞 今日も一日よろしくお願いします。何かご質問やお手伝いが必要なことがありましたら、いつでもお知らせくださいね！
+2026-07-08 11:03:57,049 INFO app.middleware.logging - [ce5771cc] Completed in 25.960s
+2026-07-08 11:04:54,118 INFO app.middleware.logging - [06ef93e8] POST /chat
+2026-07-08 11:04:54,119 INFO app.routers.chat - POST /chat
+2026-07-08 11:04:54,119 INFO app.services.ollama_service - Calling ollama...
+2026-07-08 11:04:54,120 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-08 11:05:16,266 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u3053\\u3093\\u306b\\u3061\\u306f", "stream": false}'
+2026-07-08 11:05:16,267 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-08 11:05:16,267 INFO app.services.ollama_service - Response: こんにちは！お手伝いできますか？
+2026-07-08 11:05:16,268 INFO app.middleware.logging - [06ef93e8] Completed in 22.150s
+2026-07-08 11:06:28,522 INFO app.middleware.logging - [e98603e8] POST /chat-history
+2026-07-08 11:06:28,529 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 11:06:28,531 INFO sqlalchemy.engine.Engine - INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id
+2026-07-08 11:06:28,532 INFO sqlalchemy.engine.Engine - [generated in 0.00084s] {'user_id': 3, 'question': 'こんにちは', 'answer': '今日は大変ですね', 'model': 'qwen3-8b', 'created_at': datetime.datetime(2026, 7, 8, 2, 6, 28, 531489)}
+2026-07-08 11:06:28,540 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 11:06:28,545 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 11:06:28,547 INFO sqlalchemy.engine.Engine - SELECT chat_history.id, chat_history.user_id, chat_history.question, chat_history.answer, chat_history.model, chat_history.created_at 
+FROM chat_history 
+WHERE chat_history.id = %(pk_1)s
+2026-07-08 11:06:28,547 INFO sqlalchemy.engine.Engine - [generated in 0.00028s] {'pk_1': 5}
+2026-07-08 11:06:28,549 INFO app.middleware.logging - [e98603e8] Completed in 0.028s
+2026-07-08 11:06:28,550 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 12:01:48,444 INFO app.middleware.logging - [78546a1a] GET /docs
+2026-07-08 12:01:48,469 INFO app.middleware.logging - [78546a1a] Completed in 0.026s
+2026-07-08 12:01:48,572 INFO app.middleware.logging - [1d1a0972] GET /openapi.json
+2026-07-08 12:01:48,574 INFO app.middleware.logging - [1d1a0972] Completed in 0.003s
+2026-07-08 13:59:38,131 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 13:59:38,132 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 13:59:38,133 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 13:59:38,133 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 13:59:38,134 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 13:59:38,134 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 13:59:38,134 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 13:59:38,137 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 13:59:38,138 INFO sqlalchemy.engine.Engine - [generated in 0.00041s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 13:59:38,141 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 13:59:38,141 INFO sqlalchemy.engine.Engine - [cached since 0.00399s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 13:59:38,142 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 14:43:13,930 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 14:43:13,930 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 14:43:13,932 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 14:43:13,932 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 14:43:13,934 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 14:43:13,934 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 14:43:13,935 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 14:43:13,938 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 14:43:13,938 INFO sqlalchemy.engine.Engine - [generated in 0.00029s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 14:43:13,943 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 14:43:13,943 INFO sqlalchemy.engine.Engine - [cached since 0.005269s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 14:43:13,945 INFO sqlalchemy.engine.Engine - COMMIT

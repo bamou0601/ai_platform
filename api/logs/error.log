@@ -2397,3 +2397,522 @@ DETAIL:  Key (email)=(taro@gmail.com) already exists.
 [SQL: INSERT INTO users (name, email) VALUES (%(name)s, %(email)s) RETURNING users.id]
 [parameters: {'name': 'taro', 'email': 'taro@gmail.com'}]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-07-07 18:06:07,838 ERROR app.exceptions.handlers - Unhandled Exception
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: insert or update on table "chat_history" violates foreign key constraint "chat_history_user_id_fkey"
+DETAIL:  Key (user_id)=(1) is not present in table "users".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/middleware/logging.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2543, in app
+    await route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2598, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat_history.py", line 42, in create_chat
+    return service.create_chat(
+           ~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        chat
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/chat_history_service.py", line 32, in create_chat
+    return self.repository.create(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        chat
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/repositories/chat_history_repository.py", line 34, in create
+    db.commit()
+    ~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1316, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1290, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 465, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 641, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 94, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 1234, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.ForeignKeyViolation) insert or update on table "chat_history" violates foreign key constraint "chat_history_user_id_fkey"
+DETAIL:  Key (user_id)=(1) is not present in table "users".
+
+[SQL: INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id]
+[parameters: {'user_id': 1, 'question': '今日はどうですか', 'answer': '素晴らしい', 'model': 'qwen3-8b', 'created_at': datetime.datetime(2026, 7, 7, 9, 6, 7, 815435)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-07-08 09:07:16,879 ERROR app.exceptions.handlers - Unhandled Exception
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/middleware/logging.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2543, in app
+    await route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2598, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat_history.py", line 42, in create_chat
+    return service.create_chat(
+           ~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        chat
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/chat_history_service.py", line 32, in create_chat
+    return self.repository.create(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        chat
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/repositories/chat_history_repository.py", line 35, in create
+    db.refresh()
+    ~~~~~~~~~~^^
+TypeError: Session.refresh() missing 1 required positional argument: 'instance'
+2026-07-08 09:59:05,691 ERROR app.exceptions.handlers - Unhandled Exception
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.ForeignKeyViolation: update or delete on table "users" violates foreign key constraint "chat_history_user_id_fkey" on table "chat_history"
+DETAIL:  Key (id)=(4) is still referenced from table "chat_history".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/middleware/logging.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2543, in app
+    await route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2598, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/users.py", line 88, in delete_user
+    success = service.delete_user(
+        db,
+        user_id
+    )
+  File "/home/mo_ba/projects/ai_platform/api/app/services/user_service.py", line 67, in delete_user
+    return self.repository.delete_user(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        db,
+        ^^^
+        user_id
+        ^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/api/app/repositories/user_repository.py", line 103, in delete_user
+    db.commit()
+    ~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1316, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 1290, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 465, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/unitofwork.py", line 678, in execute
+    util.preloaded.orm_persistence.delete_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, True, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 194, in delete_obj
+    _emit_delete_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        delete,
+        ^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/orm/persistence.py", line 1472, in _emit_delete_statements
+    c = connection.execute(
+        statement, del_objects, execution_options=execution_options
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.ForeignKeyViolation) update or delete on table "users" violates foreign key constraint "chat_history_user_id_fkey" on table "chat_history"
+DETAIL:  Key (id)=(4) is still referenced from table "chat_history".
+
+[SQL: DELETE FROM users WHERE users.id = %(id)s]
+[parameters: {'id': 4}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
