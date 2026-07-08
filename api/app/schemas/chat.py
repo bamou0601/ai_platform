@@ -10,6 +10,7 @@ from pydantic import BaseModel
 
 class ChatRequest(BaseModel):
     """チャットリクエストの入力データ構造""" 
+    user_id: int
     message: str
 
 class ChatResponse(BaseModel):

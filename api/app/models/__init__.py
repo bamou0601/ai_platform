@@ -7,6 +7,7 @@
 
 from app.models.user import User
 from app.models.chat_history import ChatHistory
+from app.models.prompt_template import PromptTemplate
 
 __all__ = [
     "User",

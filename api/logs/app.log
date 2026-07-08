@@ -4213,3 +4213,353 @@ FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
 2026-07-08 14:43:13,943 INFO sqlalchemy.engine.Engine - [cached since 0.005269s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
 2026-07-08 14:43:13,945 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 15:07:43,876 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 15:07:43,877 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 15:07:43,878 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 15:07:43,878 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 15:07:43,879 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 15:07:43,879 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 15:07:43,879 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:07:43,882 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 15:07:43,882 INFO sqlalchemy.engine.Engine - [generated in 0.00023s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 15:07:43,884 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 15:07:43,884 INFO sqlalchemy.engine.Engine - [cached since 0.002093s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 15:07:43,885 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 15:07:49,855 INFO app.middleware.logging - [e352049b] GET /docs
+2026-07-08 15:07:49,855 INFO app.middleware.logging - [e352049b] Completed in 0.001s
+2026-07-08 15:07:50,013 INFO app.middleware.logging - [1ae3567a] GET /openapi.json
+2026-07-08 15:07:50,038 INFO app.middleware.logging - [1ae3567a] Completed in 0.025s
+2026-07-08 15:08:08,901 INFO app.middleware.logging - [8c63aebd] GET /users
+2026-07-08 15:08:08,923 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:08:08,924 INFO sqlalchemy.engine.Engine - SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email 
+FROM users
+2026-07-08 15:08:08,925 INFO sqlalchemy.engine.Engine - [generated in 0.00029s] {}
+2026-07-08 15:08:08,927 INFO app.middleware.logging - [8c63aebd] Completed in 0.027s
+2026-07-08 15:08:08,928 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 15:08:32,266 INFO app.middleware.logging - [5af673a7] POST /chat
+2026-07-08 15:08:32,270 INFO app.routers.chat - POST /chat
+2026-07-08 15:08:32,270 INFO app.services.ollama_service - Calling ollama...
+2026-07-08 15:08:32,270 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-08 15:09:18,407 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u4eca\\u65e5\\u306f\\u3068\\u3066\\u3082\\u6691\\u3044\\u3067\\u3059\\u306d", "stream": false}'
+2026-07-08 15:09:18,408 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-08 15:09:18,408 INFO app.services.ollama_service - Response: はい、本当に暑いですね！今年は例年より気温が高く感じますよね。水分補給を忘れずに、扇風機やエアコンの活用で体を守ってくださいね。くれぐれも熱中症にはご注意ください！🌞
+2026-07-08 15:09:18,409 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:09:18,412 INFO sqlalchemy.engine.Engine - INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id
+2026-07-08 15:09:18,412 INFO sqlalchemy.engine.Engine - [generated in 0.00033s] {'user_id': 3, 'question': '今日はとても暑いですね', 'answer': 'はい、本当に暑いですね！今年は例年より気温が高く感じますよね。水分補給を忘れずに、扇風機やエアコンの活用で体を守ってくださいね。くれぐれも熱中症にはご注意ください！🌞', 'model': 'qwen3:8b', 'created_at': datetime.datetime(2026, 7, 8, 6, 9, 18, 412011)}
+2026-07-08 15:09:18,437 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 15:09:18,453 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:09:18,455 INFO sqlalchemy.engine.Engine - SELECT chat_history.id, chat_history.user_id, chat_history.question, chat_history.answer, chat_history.model, chat_history.created_at 
+FROM chat_history 
+WHERE chat_history.id = %(pk_1)s
+2026-07-08 15:09:18,455 INFO sqlalchemy.engine.Engine - [generated in 0.00028s] {'pk_1': 6}
+2026-07-08 15:09:18,457 INFO app.middleware.logging - [5af673a7] Completed in 46.191s
+2026-07-08 15:09:18,458 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 15:12:17,291 INFO app.middleware.logging - [3d9c3cc1] POST /chat
+2026-07-08 15:12:17,293 INFO app.routers.chat - POST /chat
+2026-07-08 15:12:17,293 INFO app.services.ollama_service - Calling ollama...
+2026-07-08 15:12:17,293 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-08 15:12:46,149 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u4eca\\u65e5\\u306f\\u3068\\u3066\\u3082\\u6691\\u3044\\u3067\\u3059\\u306d", "stream": false}'
+2026-07-08 15:12:46,149 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-08 15:12:46,149 INFO app.services.ollama_service - Response: 今日は本当に暑いですね！(;_;)  
+水分補給を忘れずに、エアコンや扇風機で涼しく過ごしてくださいね。  
+今後の天気の予報も気になるところですが、体調に気をつけてください！
+2026-07-08 15:12:46,150 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:12:46,151 INFO sqlalchemy.engine.Engine - INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id
+2026-07-08 15:12:46,151 INFO sqlalchemy.engine.Engine - [cached since 207.8s ago] {'user_id': 3, 'question': '今日はとても暑いですね', 'answer': '今日は本当に暑いですね！(;_;)  \n水分補給を忘れずに、エアコンや扇風機で涼しく過ごしてくださいね。  \n今後の天気の予報も気になるところですが、体調に気をつけてください！', 'model': 'qwen3:8b', 'created_at': datetime.datetime(2026, 7, 8, 6, 12, 46, 151404)}
+2026-07-08 15:12:46,154 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 15:12:46,174 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:12:46,175 INFO sqlalchemy.engine.Engine - SELECT chat_history.id, chat_history.user_id, chat_history.question, chat_history.answer, chat_history.model, chat_history.created_at 
+FROM chat_history 
+WHERE chat_history.id = %(pk_1)s
+2026-07-08 15:12:46,175 INFO sqlalchemy.engine.Engine - [cached since 207.7s ago] {'pk_1': 7}
+2026-07-08 15:12:46,177 INFO app.middleware.logging - [3d9c3cc1] Completed in 28.886s
+2026-07-08 15:12:46,177 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 15:12:56,462 INFO app.middleware.logging - [8f0a0a3b] GET /chat-history
+2026-07-08 15:12:56,464 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:12:56,465 INFO sqlalchemy.engine.Engine - SELECT chat_history.id AS chat_history_id, chat_history.user_id AS chat_history_user_id, chat_history.question AS chat_history_question, chat_history.answer AS chat_history_answer, chat_history.model AS chat_history_model, chat_history.created_at AS chat_history_created_at 
+FROM chat_history
+2026-07-08 15:12:56,465 INFO sqlalchemy.engine.Engine - [generated in 0.00017s] {}
+2026-07-08 15:12:56,467 INFO app.middleware.logging - [8f0a0a3b] Completed in 0.006s
+2026-07-08 15:12:56,468 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 15:13:34,277 INFO app.middleware.logging - [b54e8fb2] POST /chat
+2026-07-08 15:13:34,279 INFO app.routers.chat - POST /chat
+2026-07-08 15:13:34,279 INFO app.services.ollama_service - Calling ollama...
+2026-07-08 15:13:34,279 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-08 15:14:12,895 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u4eca\\u65e5\\u306f\\u3068\\u3066\\u3082\\u6691\\u3044\\u3067\\u3059\\u306d", "stream": false}'
+2026-07-08 15:14:12,895 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-08 15:14:12,895 INFO app.services.ollama_service - Response: 今日は本当に暑いですね！湿度も高いと感じるかもしれませんね。水分補給を忘れずに、外出時は日傘やひんやりアイテムを使って、体を守ってくださいね。家にいるときはエアコンや扇風機で快適に過ごせるといいですね。何かお手伝いできることがありましたら、いつでも言ってください！
+2026-07-08 15:14:12,896 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:14:12,897 INFO sqlalchemy.engine.Engine - INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id
+2026-07-08 15:14:12,897 INFO sqlalchemy.engine.Engine - [cached since 294.5s ago] {'user_id': 3, 'question': '今日はとても暑いですね', 'answer': '今日は本当に暑いですね！湿度も高いと感じるかもしれませんね。水分補給を忘れずに、外出時は日傘やひんやりアイテムを使って、体を守ってくださいね。家にいるときはエアコンや扇風機で快適に過ごせるといいですね。何かお手伝いできることがありましたら、いつでも言ってください！', 'model': 'qwen3:8b', 'created_at': datetime.datetime(2026, 7, 8, 6, 14, 12, 897009)}
+2026-07-08 15:14:12,918 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 15:14:12,927 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:14:12,928 INFO sqlalchemy.engine.Engine - SELECT chat_history.id, chat_history.user_id, chat_history.question, chat_history.answer, chat_history.model, chat_history.created_at 
+FROM chat_history 
+WHERE chat_history.id = %(pk_1)s
+2026-07-08 15:14:12,928 INFO sqlalchemy.engine.Engine - [cached since 294.5s ago] {'pk_1': 8}
+2026-07-08 15:14:12,930 INFO app.middleware.logging - [b54e8fb2] Completed in 38.653s
+2026-07-08 15:14:12,931 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 15:14:18,384 INFO app.middleware.logging - [3bb374ca] GET /chat-history
+2026-07-08 15:14:18,386 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:14:18,387 INFO sqlalchemy.engine.Engine - SELECT chat_history.id AS chat_history_id, chat_history.user_id AS chat_history_user_id, chat_history.question AS chat_history_question, chat_history.answer AS chat_history_answer, chat_history.model AS chat_history_model, chat_history.created_at AS chat_history_created_at 
+FROM chat_history
+2026-07-08 15:14:18,387 INFO sqlalchemy.engine.Engine - [cached since 81.93s ago] {}
+2026-07-08 15:14:18,389 INFO app.middleware.logging - [3bb374ca] Completed in 0.005s
+2026-07-08 15:14:18,390 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 15:14:36,121 INFO app.middleware.logging - [0de0d638] POST /chat
+2026-07-08 15:14:36,122 INFO app.routers.chat - POST /chat
+2026-07-08 15:14:36,122 INFO app.services.ollama_service - Calling ollama...
+2026-07-08 15:14:36,122 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-08 15:15:09,889 INFO app.services.ollama_service - Request: b'{"model": "qwen3:8b", "prompt": "\\u4eca\\u65e5\\u306f\\u3068\\u3066\\u3082\\u5bd2\\u3044\\u3067\\u3059\\u306d", "stream": false}'
+2026-07-08 15:15:09,890 INFO app.services.ollama_service - Response received from Ollama.
+2026-07-08 15:15:09,890 INFO app.services.ollama_service - Response: 今日は本当に寒いですね！寒さに体がつらいかもしれませんね。こたつや毛布で温まりながら、お茶でも飲んでリラックスしてはいかがですか？外の寒さは心と体に響くので、無理せず家の中で温かな時間を過ごすのがおすすめです。何かお手伝いが必要なことがあればいつでも言ってくださいね！❄️🍵
+2026-07-08 15:15:09,890 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:15:09,891 INFO sqlalchemy.engine.Engine - INSERT INTO chat_history (user_id, question, answer, model, created_at) VALUES (%(user_id)s, %(question)s, %(answer)s, %(model)s, %(created_at)s) RETURNING chat_history.id
+2026-07-08 15:15:09,891 INFO sqlalchemy.engine.Engine - [cached since 351.5s ago] {'user_id': 3, 'question': '今日はとても寒いですね', 'answer': '今日は本当に寒いですね！寒さに体がつらいかもしれませんね。こたつや毛布で温まりながら、お茶でも飲んでリラックスしてはいかがですか？外の寒さは心と体に響くので、無理せず家の中で温かな時間を過ごすのがおすすめです。何かお手伝いが必要なことがあればいつでも言ってくださいね！❄️🍵', 'model': 'qwen3:8b', 'created_at': datetime.datetime(2026, 7, 8, 6, 15, 9, 891190)}
+2026-07-08 15:15:09,893 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 15:15:09,912 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:15:09,913 INFO sqlalchemy.engine.Engine - SELECT chat_history.id, chat_history.user_id, chat_history.question, chat_history.answer, chat_history.model, chat_history.created_at 
+FROM chat_history 
+WHERE chat_history.id = %(pk_1)s
+2026-07-08 15:15:09,913 INFO sqlalchemy.engine.Engine - [cached since 351.5s ago] {'pk_1': 9}
+2026-07-08 15:15:09,915 INFO app.middleware.logging - [0de0d638] Completed in 33.795s
+2026-07-08 15:15:09,916 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 15:15:29,065 INFO app.middleware.logging - [d6f81d90] GET /chat-history
+2026-07-08 15:15:29,066 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 15:15:29,066 INFO sqlalchemy.engine.Engine - SELECT chat_history.id AS chat_history_id, chat_history.user_id AS chat_history_user_id, chat_history.question AS chat_history_question, chat_history.answer AS chat_history_answer, chat_history.model AS chat_history_model, chat_history.created_at AS chat_history_created_at 
+FROM chat_history
+2026-07-08 15:15:29,066 INFO sqlalchemy.engine.Engine - [cached since 152.6s ago] {}
+2026-07-08 15:15:29,069 INFO app.middleware.logging - [d6f81d90] Completed in 0.004s
+2026-07-08 15:15:29,070 INFO sqlalchemy.engine.Engine - ROLLBACK
+2026-07-08 15:34:29,784 INFO app.middleware.logging - [cd7f3a18] POST /chat
+2026-07-08 15:34:29,790 INFO app.routers.chat - POST /chat
+2026-07-08 15:34:29,790 INFO app.services.ollama_service - Calling ollama...
+2026-07-08 15:34:29,790 INFO app.services.ollama_service - Model: qwen3:8b
+2026-07-08 15:36:29,895 ERROR app.exceptions.handlers - Ollama Connection Error
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.14/http/client.py", line 1450, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 336, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 297, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/socket.py", line 725, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/util/util.py", line 39, in reraise
+    raise value
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/urllib3/connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+        self, url, f"Read timed out. (read timeout={timeout_value})"
+    ) from err
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='127.0.0.1', port=11434): Read timed out. (read timeout=120)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "/home/mo_ba/projects/ai_platform/api/app/routers/chat.py", line 39, in chat
+    return service.chat(db, request)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/api/app/services/chat_service.py", line 22, in chat
+    response = self.ollama_service.chat(request.message)
+  File "/home/mo_ba/projects/ai_platform/api/app/services/ollama_service.py", line 28, in chat
+    response = requests.post(
+        f"{settings.ollama_url}/api/generate",
+    ...<5 lines>...
+        timeout=120
+    )
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/mo_ba/projects/ai_platform/.venv/lib/python3.14/site-packages/requests/adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=11434): Read timed out. (read timeout=120)
+2026-07-08 15:36:29,940 INFO app.middleware.logging - [cd7f3a18] Completed in 120.156s
+2026-07-08 17:58:20,496 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 17:58:20,498 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 17:58:20,499 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 17:58:20,500 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 17:58:20,501 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 17:58:20,501 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 17:58:20,502 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 17:58:20,506 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 17:58:20,507 INFO sqlalchemy.engine.Engine - [generated in 0.00087s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 17:58:20,509 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 17:58:20,509 INFO sqlalchemy.engine.Engine - [cached since 0.003255s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 17:58:20,510 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 17:58:20,511 INFO sqlalchemy.engine.Engine - [cached since 0.004467s ago] {'table_name': 'prompt_templates', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 17:58:20,512 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 17:58:25,627 INFO app.middleware.logging - [d8cd4a32] GET /docs
+2026-07-08 17:58:25,628 INFO app.middleware.logging - [d8cd4a32] Completed in 0.001s
+2026-07-08 17:58:25,780 INFO app.middleware.logging - [e7cc2dd4] GET /openapi.json
+2026-07-08 17:58:25,818 INFO app.middleware.logging - [e7cc2dd4] Completed in 0.038s
+2026-07-08 18:09:01,797 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 18:09:01,797 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:09:01,798 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 18:09:01,798 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:09:01,799 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 18:09:01,800 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:09:01,800 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 18:09:01,806 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:09:01,807 INFO sqlalchemy.engine.Engine - [generated in 0.00055s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:09:01,813 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:09:01,814 INFO sqlalchemy.engine.Engine - [cached since 0.007812s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:09:01,816 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:09:01,816 INFO sqlalchemy.engine.Engine - [cached since 0.01048s ago] {'table_name': 'prompt_templates', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:09:01,818 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 18:15:02,188 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 18:15:02,189 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:15:02,191 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 18:15:02,192 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:15:02,194 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 18:15:02,194 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:15:02,196 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 18:15:02,199 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:15:02,199 INFO sqlalchemy.engine.Engine - [generated in 0.00037s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:15:02,202 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:15:02,202 INFO sqlalchemy.engine.Engine - [cached since 0.003232s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:15:02,203 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:15:02,203 INFO sqlalchemy.engine.Engine - [cached since 0.0044s ago] {'table_name': 'prompt_templates', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:15:02,204 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 18:15:15,535 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 18:15:15,536 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:15:15,537 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 18:15:15,537 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:15:15,538 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 18:15:15,538 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:15:15,539 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 18:15:15,542 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:15:15,543 INFO sqlalchemy.engine.Engine - [generated in 0.00048s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:15:15,545 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:15:15,545 INFO sqlalchemy.engine.Engine - [cached since 0.003132s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:15:15,546 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:15:15,546 INFO sqlalchemy.engine.Engine - [cached since 0.004397s ago] {'table_name': 'prompt_templates', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:15:15,548 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 18:15:22,171 INFO sqlalchemy.engine.Engine - select pg_catalog.version()
+2026-07-08 18:15:22,172 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:15:22,173 INFO sqlalchemy.engine.Engine - select current_schema()
+2026-07-08 18:15:22,173 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:15:22,174 INFO sqlalchemy.engine.Engine - show standard_conforming_strings
+2026-07-08 18:15:22,174 INFO sqlalchemy.engine.Engine - [raw sql] {}
+2026-07-08 18:15:22,175 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 18:15:22,181 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:15:22,181 INFO sqlalchemy.engine.Engine - [generated in 0.00037s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:15:22,184 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:15:22,184 INFO sqlalchemy.engine.Engine - [cached since 0.003528s ago] {'table_name': 'chat_history', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:15:22,185 INFO sqlalchemy.engine.Engine - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-07-08 18:15:22,186 INFO sqlalchemy.engine.Engine - [cached since 0.004661s ago] {'table_name': 'prompt_templates', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-07-08 18:15:22,187 INFO sqlalchemy.engine.Engine - COMMIT
+2026-07-08 18:15:27,325 INFO app.middleware.logging - [2da45dc9] GET /docs
+2026-07-08 18:15:27,326 INFO app.middleware.logging - [2da45dc9] Completed in 0.001s
+2026-07-08 18:15:27,405 INFO app.middleware.logging - [9e110d98] GET /openapi.json
+2026-07-08 18:15:27,439 INFO app.middleware.logging - [9e110d98] Completed in 0.034s
+2026-07-08 18:15:35,272 INFO app.middleware.logging - [b61e2ef0] GET /prompt-templates
+2026-07-08 18:15:35,276 INFO sqlalchemy.engine.Engine - BEGIN (implicit)
+2026-07-08 18:15:35,277 INFO sqlalchemy.engine.Engine - SELECT prompt_templates.id AS prompt_templates_id, prompt_templates.name AS prompt_templates_name, prompt_templates.category AS prompt_templates_category, prompt_templates.description AS prompt_templates_description, prompt_templates.system_prompt AS prompt_templates_system_prompt, prompt_templates.temperature AS prompt_templates_temperature, prompt_templates.top_p AS prompt_templates_top_p, prompt_templates.is_default AS prompt_templates_is_default, prompt_templates.created_at AS prompt_templates_created_at, prompt_templates.updated_at AS prompt_templates_updated_at 
+FROM prompt_templates
+2026-07-08 18:15:35,277 INFO sqlalchemy.engine.Engine - [generated in 0.00017s] {}
+2026-07-08 18:15:35,279 INFO app.middleware.logging - [b61e2ef0] Completed in 0.007s
+2026-07-08 18:15:35,280 INFO sqlalchemy.engine.Engine - ROLLBACK
