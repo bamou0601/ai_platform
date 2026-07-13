@@ -22,6 +22,8 @@ from app.routers.prompt_template import router as prompt_template
 from app.routers.conversation import router as conversation
 from app.routers.conversation_message import (
     router as conversation_message)
+from app.routers.model import router as model
+
 # FastAPIを起動時にテーブルを作成する
 from app.db.init_db import init_db
 
@@ -93,3 +95,4 @@ app.include_router(
     conversation_message,
     tags=["Conversation Messages"]
 )
+app.include_router(model)

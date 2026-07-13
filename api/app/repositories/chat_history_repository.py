@@ -23,12 +23,7 @@ class ChatHistoryRepository:
     ) -> ChatHistory:
         """会話履歴を登録する"""
 
-        db_chat = ChatHistory(
-            user_id=chat.user_id,
-            question=chat.question,
-            answer=chat.answer,
-            model=chat.model
-        )
+        db_chat = ChatHistory(**chat.model_dump())
 
         db.add(db_chat)
         db.commit()
@@ -75,9 +70,16 @@ class ChatHistoryRepository:
         if db_chat is None:
             return None
         
-        db_chat.question = chat.question
-        db_chat.answer =chat.answer
-        db_chat.model = chat.model
+        update_data = chat.model_dump(
+            exclude_unset=True
+        )
+
+        for key, value in update_data.items():
+            setattr(
+                db_chat,
+                key,
+                value
+            )
 
         db.commit()
         db.refresh(db_chat)

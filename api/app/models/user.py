@@ -1,8 +1,19 @@
-# 機能: UserテーブルのORMモデル
+"""
+機能: UserテーブルのORMモデル
+ロジック: Userごとの操作を管理する
+作成者: 馬 猛
+作成日: 2026/07/02
+修正日: 2026/07/10
+"""
 
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
+from datetime import datetime
+
+from sqlalchemy import (
+    Column, 
+    Integer, 
+    String,
+    DateTime
+) 
 
 from app.db.base import Base
 
@@ -11,18 +22,25 @@ class User(Base):
 
     __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(
-        primary_key=True, # 重複しない
+    id = Column(
+        Integer,
+        primary_key=True,
         index=True
     )
 
-    name: Mapped[str] = mapped_column(
-        String(100),
+    name = Column(
+        String(100), 
         nullable=False
     )
 
-    email: Mapped[str] = mapped_column(
-        String(255),
-        unique=True,
+
+    email = Column(
+        String(255), 
+        unique=True, 
         nullable=False
+    )
+
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow
     )

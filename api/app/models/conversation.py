@@ -5,6 +5,8 @@
 作成日: 2026/07/09
 """
 
+from datetime import datetime
+
 from sqlalchemy import (
     Column,
     Integer,
@@ -13,22 +15,33 @@ from sqlalchemy import (
     DateTime
 )
 
-from datetime import datetime
 from app.db.base import Base
-
 
 class Conversation(Base):
     __tablename__ = "conversations"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(
+        Integer, 
+        primary_key=True, 
+        index=True
+    )
 
-    user_id = Column(Integer, nullable=False)
+    user_id = Column(
+        Integer, 
+        nullable=False
+    )
 
-    title = Column(String(255), nullable=False)
+    title = Column(
+        String(255), 
+        nullable=False
+    )
     
     description = Column(String(500))
 
-    is_active = Column(Boolean, default=True)
+    is_active = Column(
+        Boolean, 
+        default=True
+    )
 
     created_at = Column(
         DateTime,

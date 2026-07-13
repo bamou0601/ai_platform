@@ -10,6 +10,7 @@ from app.models.chat_history import ChatHistory
 from app.models.prompt_template import PromptTemplate
 from app.models.conversation import Conversation
 from app.models.conversation_message import ConversationMessage
+from app.models.model import Model
 
 __all__ = [
     "User",

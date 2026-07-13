@@ -10,26 +10,27 @@ from app.schemas.chat import ChatResponse
 from app.config import settings
 import logging
 
+logger = logging.getLogger(__name__)
 
 # Ollama とのやり取りを担当するサービスクラス
 class OllamaService:
     # ユーザーからのメッセージを受け取り、応答を返す
-    def chat(self, message: str) -> ChatResponse:
+    def chat(
+            self, 
+            messages: list[dict]
+    ) -> str:
 
         # ログの設定を初期化
-        logger = logging.getLogger(__name__)
         logger.info("Calling ollama...")
-
-        # # error logを書き込む動作確認
-        # raise Exception("Test Exception")
-
         # ログにモデル名を出力
         logger.info(f"Model: {settings.ollama_model}")
+        logger.info(f"User Message: {messages}")
+
         response = requests.post(
-            f"{settings.ollama_url}/api/generate",
+            f"{settings.ollama_url}/api/chat",
             json={
                 "model": settings.ollama_model,
-                "prompt": message,
+                "messages": messages,
                 "stream": False
             },
             timeout=120
@@ -43,13 +44,15 @@ class OllamaService:
         data = response.json()
 
         # 応答の内容をログに出力
+        # logger.info(f"System Prompt: {system_prompt}")
+        
         logger.info("Response received from Ollama.")
 
+        answer=data["message"]["content"]
         # 応答データを ChatResponse 型に変換して返す
-        logger.info(f"Response: {data['response']}")
-        return ChatResponse(
-            answer=data["response"]
-        )
+        logger.info(f"Response: {answer}")
+        
+        return answer
     
     def get_models(self):
         # """Ollama サーバーから利用可能なモデル（タグ）一覧を取得する。
@@ -86,6 +89,4 @@ class OllamaService:
 
         return models
 
-
-    
 

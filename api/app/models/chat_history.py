@@ -3,17 +3,19 @@
 ロジック: AIとの会話履歴を保持する
 作成者: 馬 猛
 作成日: 2026/07/07
+修正日: 2026/07/10
 """
 
 from datetime import datetime
 
-from sqlalchemy import DateTime
-from sqlalchemy import ForeignKey
-from sqlalchemy import String
-from sqlalchemy import Text
-
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
+from sqlalchemy import (
+    Column,
+    Integer,
+    ForeignKey,
+    Text,
+    String,
+    DateTime
+)
 
 from app.db.base import Base
 
@@ -22,32 +24,34 @@ class ChatHistory(Base):
 
     __tablename__ = "chat_history"
 
-    id: Mapped[int] = mapped_column(
+    id = Column(
+        Integer,
         primary_key=True,
-        index=True 
+        index=True
     )
 
-    user_id: Mapped[int] = mapped_column(
+    user_id = Column(
+        Integer,
         ForeignKey("users.id"),
         nullable=False
     )
 
-    question: Mapped[str] = mapped_column(
+    question = Column(
         Text,
         nullable=False
     )
 
-    answer: Mapped[str] = mapped_column(
+    answer = Column(
         Text,
         nullable=False
     )
 
-    model: Mapped[str] = mapped_column(
+    model = Column(
         String(100),
         nullable=False
     )
 
-    created_at: Mapped[datetime] = mapped_column(
+    created_at = Column(
         DateTime,
         default=datetime.utcnow
     )

@@ -36,6 +36,16 @@ class ConversationMessageService:
         conversation_message_id: int
     ):
         return self.repository.find_by_id(db, conversation_message_id)
+    
+    def get_by_conversation(
+        self,
+        db: Session,
+        conversation_id: int
+    ):
+        return self.repository.find_by_conversation_id(
+            db,
+            conversation_id
+        )
 
     def update(
         self,

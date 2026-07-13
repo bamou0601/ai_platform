@@ -48,6 +48,25 @@ class ConversationMessageRepository:
             .filter(ConversationMessage.id == conversation_message_id)
             .first()
         )
+    
+    def find_by_conversation_id(
+        self,
+        db: Session,
+        conversation_id: int
+    ) -> list[ConversationMessage]:
+        return(
+            db.query(ConversationMessage)
+            .filter(
+                ConversationMessage.conversation_id
+                == conversation_id
+            )
+            .order_by(
+                ConversationMessage.created_at
+            )
+            .all()
+        )
+
+
 
     def update(
         self,
@@ -56,7 +75,9 @@ class ConversationMessageRepository:
         conversation_message: ConversationMessageUpdate
     ) -> ConversationMessage | None:
         
-        db_conversation_message = self.find_by_id(db, conversation_message_id)
+        db_conversation_message = self.find_by_id(
+            db, conversation_message_id
+        )
 
         if not db_conversation_message:
             return None
