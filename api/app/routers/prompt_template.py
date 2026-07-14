@@ -7,7 +7,6 @@ from fastapi import (
     Depends,
     HTTPException
 )
-
 from sqlalchemy.orm import Session
 
 from app.db.dependencies import get_db
@@ -51,7 +50,7 @@ def create_prompt(
 def get_prompts(
     db: Session = Depends(get_db)
 ):
-    return service.get_prompts(db)
+    return service.get_all(db)
 
 
 @router.get(
@@ -124,3 +123,68 @@ def delete_prompt(
     return {
         "message": "Prompt deleted successfully"
     }
+
+# 有効一覧
+@router.get(
+    "/active",
+    response_model=list[PromptTemplateResponse]
+)
+def get_active(
+    db: Session = Depends(get_db)
+):
+    return service.get_active(db)
+
+
+# Default Prompt
+@router.get(
+    "/default",
+    response_model=PromptTemplateResponse
+)
+def get_default(
+    db: Session = Depends(get_db)
+):
+    return service.get_default(db)
+
+
+# 有効化
+@router.patch(
+    "/{prompt_id}/enable",
+    response_model=PromptTemplateResponse
+)
+def enable(
+    prompt_id: int,
+    db: Session = Depends(get_db)
+):
+    return service.enable(
+        db,
+        prompt_id
+    )
+
+# 無効化
+@router.patch(
+    "/{prompt_id}/disable",
+    response_model=PromptTemplateResponse
+)
+def disable(
+    prompt_id: int,
+    db: Session = Depends(get_db)
+):
+    return service.disable(
+        db,
+        prompt_id
+    )
+
+# Default変更
+@router.patch(
+    "/{prompt_id}/default",
+    response_model=PromptTemplateResponse
+)
+def set_default(
+    prompt_id: int,
+    db: Session = Depends(get_db)
+):
+    return service.set_default(
+        db,
+        prompt_id
+    )
+

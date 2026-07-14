@@ -33,26 +33,22 @@ class PromptTemplateUpdate(BaseModel):
 
     is_default: bool | None = None
 
+    is_active: bool | None = None
+
 class PromptTemplateResponse(BaseModel):
 
     id: int
-
     name: str
-
     category: str | None
-
     description: str | None
-
     system_prompt: str
-
     temperature: float
-
     top_p: float
 
     is_default: bool
+    is_active: bool
 
     created_at: datetime
-
     updated_at: datetime
 
     model_config = {

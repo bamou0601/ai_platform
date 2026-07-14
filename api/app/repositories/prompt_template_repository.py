@@ -47,9 +47,71 @@ class PromptTemplateRepository:
 
         return (
             db.query(PromptTemplate)
-            .filter(PromptTemplate.id == prompt_id)
+            .filter(
+                PromptTemplate.id == prompt_id,
+                PromptTemplate.is_active == True
+            )
             .first()
         )
+
+    def find_all_active(
+        self,
+        db: Session
+    ):
+        return(
+            db.query(PromptTemplate)
+            .filter(PromptTemplate.is_active == True)
+            .all()
+        )
+
+    def find_default(
+        self,
+        db: Session
+    ):
+        return (
+            db.query(PromptTemplate)
+            .filter(
+                PromptTemplate.is_default == True,
+                PromptTemplate.is_active == True
+            )
+            .first()
+        )
+
+    def set_default(
+        self,
+        db: Session,
+        prompt_id: int
+    ):
+        
+        db.query(PromptTemplate).update({"is_default": False})
+
+        prompt = (
+            db.query(PromptTemplate)
+            .filter(
+                PromptTemplate.id == prompt_id
+            )
+            .first()
+        )
+
+        if prompt is None:
+            prompt.is_default = True
+
+        db.commit()
+        return prompt
+
+    def disable(
+        self,
+        db: Session,
+        prompt_id: int
+    ):
+        
+        prompt = self.find_by_id(db, prompt_id)
+
+        if prompt:
+            prompt.is_active = False
+            db.commit()
+        
+        return prompt
 
 
     def update(

@@ -3,6 +3,7 @@
 ロジック: Prompt Templateのビジネスロジック
 """
 
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.repositories.prompt_template_repository import PromptTemplateRepository
@@ -27,13 +28,13 @@ class PromptTemplateService:
             prompt
         )
 
-    def get_prompts(
+    def get_all(
         self,
         db: Session
     ):
         return self.repository.find_all(db)
 
-    def get_prompt(
+    def get(
         self,
         db: Session,
         prompt_id: int
@@ -42,6 +43,13 @@ class PromptTemplateService:
             db,
             prompt_id
         )
+    
+    # 有効prompt一覧
+    def get_active(
+        self,
+        db: Session
+    ):
+        return self.repository.find_all_active(db)
 
     def update_prompt(
         self,
@@ -64,3 +72,71 @@ class PromptTemplateService:
             db,
             prompt_id
         )
+    
+
+    def get_default(
+        self,
+        db: Session
+    ):
+        prompt = self.repository.find_default(db)
+        if prompt is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Default Prompt not found"
+            )
+        
+        return prompt
+    
+    # 有効化
+    def enable(
+        self,
+        db: Session,
+        prompt_id: int
+    ):
+        prompt = self.repository.enable(
+            db,
+            prompt_id
+        )
+
+        if prompt is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Prompt Template not found"
+            )
+        return prompt
+
+    # 無効化
+    def disable(
+        self,
+        db: Session,
+        prompt_id: int
+    ):
+        prompt = self.repository.disable(
+            db,
+            prompt_id
+        )
+        
+        if prompt is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Prompt Template not found"
+            )
+        return prompt
+    
+    # Default変更
+    def set_default(
+        self,
+        db: Session,
+        prompt_id: int
+    ):
+        prompt = self.repository.set_default(
+            db,
+            prompt_id
+        )
+
+        if prompt is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Prompt Template not found"
+            )
+        return prompt

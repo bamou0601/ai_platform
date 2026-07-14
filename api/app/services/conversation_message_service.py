@@ -1,6 +1,7 @@
 """
 機能:Conversation Message Service
 ロジック: Conversation Messageのビジネスロジック
+servicesのコーディング規約として
 """
 
 from sqlalchemy.orm import Session

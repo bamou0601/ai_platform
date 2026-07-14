@@ -56,6 +56,12 @@ class PromptTemplate(Base):
         default=False
     )
 
+    is_active = Column(
+        Boolean,
+        nullable=False,
+        default=True
+    )
+
     created_at = Column(
         DateTime, 
         default=datetime.utcnow
