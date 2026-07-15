@@ -14,7 +14,8 @@ from app.db.dependencies import get_db
 from app.schemas.prompt_template import (
     PromptTemplateCreate,
     PromptTemplateUpdate,
-    PromptTemplateResponse
+    PromptTemplateResponse,
+    PromptTemplatePage
 )
 
 from app.services.prompt_template_service import (
@@ -45,12 +46,21 @@ def create_prompt(
 
 @router.get(
     "",
-    response_model=list[PromptTemplateResponse]
+    #response_model=list[PromptTemplateResponse]
+    response_model=PromptTemplatePage
 )
 def get_prompts(
+    page: int = 1,
+    size: int = 20,
+    keyword: str | None = None,
+    active: bool | None = None,
+    sort: str = "created_at",
+    order: str = "desc",
     db: Session = Depends(get_db)
 ):
-    return service.get_all(db)
+    return service.get_all(
+        db, page, size, keyword, active, sort, order
+    )
 
 
 @router.get(

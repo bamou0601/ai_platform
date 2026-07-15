@@ -1,6 +1,7 @@
 """
 機能: Conversation Repository
 ロジック: ConversationテーブルへのCRUD操作
+creat->find_all->find_by_id->update->deleteという順に
 作成者: 馬 猛
 作成日: 2026/07/09
 """

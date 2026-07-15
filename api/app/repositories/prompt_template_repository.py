@@ -1,11 +1,14 @@
 """
 機能: Prompt Template Repository
 ロジック: Prompt TemplateテーブルへのCRUD操作
+create,find_all,find_by_id,find_all_active
+find_default,set_default,enable,disable,update,delete
 作成者: 馬 猛
 作成日: 2026/07/08
 """
 
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 
 from app.models.prompt_template import PromptTemplate
 from app.schemas.prompt_template import (
@@ -33,10 +36,60 @@ class PromptTemplateRepository:
 
     def find_all(
         self,
-        db: Session
-    ) -> list[PromptTemplate]:
+        db: Session,
+        page: int = 1,
+        size: int = 20,
+        keyword: str | None = None,
+        active: bool | None = None,
+        sort: str = "created_at",
+        order: str = "desc"
+    ) -> Tuple[int,list[PromptTemplate]]:
 
-        return db.query(PromptTemplate).all()
+        # query生成
+        query = db.query(PromptTemplate)
+
+        #filter
+        if active is not None:
+            query = query.filter(
+                PromptTemplate.is_active == active
+            )
+        
+        #search
+        if keyword:
+            query = query.filter(
+                or_(
+                    PromptTemplate.name.ilike(f"%{keyword}%"),
+                    PromptTemplate.description.ilike(f"%{keyword}%")
+                )
+            )
+
+        # 件数取得
+        total = query.count()
+
+        #sort
+        sort_column = getattr(
+            PromptTemplate,
+            sort,
+            PromptTemplate.created_at
+        )
+
+        if order == "asc":
+            query = query.order_by(
+                sort_column.asc()
+            )
+        else:
+            query = query.order_by(
+                sort_column.desc()
+            )
+        
+        items = (
+            query
+            .offset((page - 1) * size).limit(size).all()
+        )
+        
+        return total, items
+
+        # return db.query(PromptTemplate).all()
 
 
     def find_by_id(
@@ -99,13 +152,26 @@ class PromptTemplateRepository:
         db.commit()
         return prompt
 
+    def enable(
+        self,
+        db: Session,
+        prompt_id: int
+    ):
+        prompt = self.find_by_id_all(db, prompt_id)
+        if prompt:
+            prompt.is_active = True
+            db.commit()
+        
+        return prompt
+
+
     def disable(
         self,
         db: Session,
         prompt_id: int
     ):
         
-        prompt = self.find_by_id(db, prompt_id)
+        prompt = self.find_by_id_all(db, prompt_id)
 
         if prompt:
             prompt.is_active = False

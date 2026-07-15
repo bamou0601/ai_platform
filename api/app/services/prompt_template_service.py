@@ -1,6 +1,8 @@
 """
 機能: Prompt Template Service
 ロジック: Prompt Templateのビジネスロジック
+create,find_all,find_by_id,find_all_active
+find_default,set_default,enable,disable,update,delete
 """
 
 from fastapi import HTTPException
@@ -9,7 +11,8 @@ from sqlalchemy.orm import Session
 from app.repositories.prompt_template_repository import PromptTemplateRepository
 from app.schemas.prompt_template import (
     PromptTemplateCreate,
-    PromptTemplateUpdate
+    PromptTemplateUpdate,
+    PromptTemplatePage
 )
 
 
@@ -30,9 +33,32 @@ class PromptTemplateService:
 
     def get_all(
         self,
-        db: Session
-    ):
-        return self.repository.find_all(db)
+        db: Session,
+        page: int,
+        size: int,
+        keyword: str | None,
+        active: bool | None,
+        sort: str,
+        order: str
+    ) -> PromptTemplatePage:
+        total, items = self.repository.find_all(
+            db=db,
+            page=page,
+            size=size,
+            keyword=keyword,
+            active=active,
+            sort=sort,
+            order=order
+        )
+
+        return PromptTemplatePage(
+            total=total,
+            page=page,
+            size=size,
+            items=items
+        )
+
+        #return self.repository.find_all(db)
 
     def get(
         self,
@@ -43,13 +69,6 @@ class PromptTemplateService:
             db,
             prompt_id
         )
-    
-    # 有効prompt一覧
-    def get_active(
-        self,
-        db: Session
-    ):
-        return self.repository.find_all_active(db)
 
     def update_prompt(
         self,
@@ -73,7 +92,7 @@ class PromptTemplateService:
             prompt_id
         )
     
-
+    # defaultを取得
     def get_default(
         self,
         db: Session
@@ -86,6 +105,13 @@ class PromptTemplateService:
             )
         
         return prompt
+
+    # 有効prompt一覧
+    def get_active(
+        self,
+        db: Session
+    ):
+        return self.repository.find_all_active(db)
     
     # 有効化
     def enable(
