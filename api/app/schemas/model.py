@@ -7,11 +7,16 @@
 
 from datetime import datetime
 
-from pydantic import BaseModel
-from pydantic import ConfigDict
+from pydantic import BaseModel, ConfigDict
 
 
 class ModelCreate(BaseModel):
+    """
+    Model登録時のリクエストスキーマ。
+
+    新しいLLMモデルを登録するための
+    リクエストデータを定義する。
+    """
 
     name: str
     provider: str
@@ -20,6 +25,12 @@ class ModelCreate(BaseModel):
 
 
 class ModelUpdate(BaseModel):
+    """
+    Model更新時のリクエストスキーマ。
+
+    登録済みのLLMモデル情報を更新するための
+    リクエストデータを定義する。
+    """
 
     name: str
     provider: str
@@ -28,6 +39,12 @@ class ModelUpdate(BaseModel):
 
 
 class ModelResponse(BaseModel):
+    """
+    Model取得時のレスポンススキーマ。
+
+    APIから返却するLLMモデル情報を定義する。
+    SQLAlchemy ORMオブジェクトからの変換に対応する。
+    """
 
     id: int
     name: str
@@ -36,6 +53,6 @@ class ModelResponse(BaseModel):
     is_active: bool
     created_at: datetime
 
-    model_config = ConfigDict(
-        from_attributes=True
-    )
+    # SQLAlchemy ORMオブジェクトから
+    # Pydanticモデルへの変換を有効にする
+    model_config = ConfigDict(from_attributes=True)

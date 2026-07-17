@@ -1,24 +1,44 @@
-# """
-# 機能: Ollama サービス連携
-# ロジック: リクエストを Ollama API に送信し、応答を ChatResponse へ整形する
-# 作成者: 馬 猛
-# 作成日: 2026/07/2
-# """
+"""
+機能: Ollama Service
+ロジック: Ollama APIとの通信およびモデル情報の取得を行う
+作成者: 馬 猛
+作成日: 2026/07/02
+"""
 
-import requests 
-from app.schemas.chat import ChatResponse
-from app.config import settings
 import logging
+
+import requests
+
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
+
 # Ollama とのやり取りを担当するサービスクラス
 class OllamaService:
+    """
+    Ollamaとの通信を行うService。
+
+    Ollama APIへチャットリクエストを送信し、
+    AIからの応答や利用可能なモデル一覧を取得する。
+    """
+
     # ユーザーからのメッセージを受け取り、応答を返す
-    def chat(
-            self, 
-            messages: list[dict]
-    ) -> str:
+    def chat(self, messages: list[dict]) -> str:
+        """
+        Ollamaへチャットリクエストを送信する。
+
+        会話履歴を含むメッセージをOllama APIへ送信し、
+        AIが生成した回答を取得する。
+
+        Args:
+            messages (list[dict]):
+                Ollamaへ送信する会話メッセージ一覧
+
+        Returns:
+            str:
+                AIが生成した回答
+        """
 
         # ログの設定を初期化
         logger.info("Calling ollama...")
@@ -31,9 +51,9 @@ class OllamaService:
             json={
                 "model": settings.ollama_model,
                 "messages": messages,
-                "stream": False
+                "stream": False,
             },
-            timeout=120
+            timeout=120,
         )
 
         # リクエストの内容をログに出力
@@ -45,48 +65,38 @@ class OllamaService:
 
         # 応答の内容をログに出力
         # logger.info(f"System Prompt: {system_prompt}")
-        
+
         logger.info("Response received from Ollama.")
 
-        answer=data["message"]["content"]
+        answer = data["message"]["content"]
         # 応答データを ChatResponse 型に変換して返す
         logger.info(f"Response: {answer}")
-        
+
         return answer
-    
+
     def get_models(self):
-        # """Ollama サーバーから利用可能なモデル（タグ）一覧を取得する。
+        """
+        利用可能なOllamaモデル一覧を取得する。
 
-        # 処理の流れ:
-        # 1. 設定された `settings.ollama_url` に対して `/api/tags` へ GET リクエストを送信する。
-        # 2. HTTP レスポンスのステータスコードをチェックし、成功でなければ例外を送出する。
-        # 3. レスポンスのボディを JSON としてパースし、そのデータを返す。
+        Ollama APIの/api/tagsを呼び出し、
+        利用可能なモデル名のみを一覧で取得する。
 
-        # 戻り値:
-        #     dict|list: Ollama API が返す JSON データ（モデル/タグ一覧）。
-        # """
+        Returns:
+            list[str]:
+                利用可能なモデル名一覧
+        """
 
-        # API へ GET リクエストを送信
-
-        logger = logging.getLogger(__name__)
-        
         response = requests.get(
-            f"{settings.ollama_url}/api/tags",
-            timeout=30
+            f"{settings.ollama_url}/api/tags", timeout=30
         )
 
-         # 成功ステータスでなければ例外を発生させる
+        # 成功ステータスでなければ例外を発生させる
         response.raise_for_status()
-               
+
         data = response.json()
 
-        models = [
-            model["name"]
-            for model in data.get("models", [])
-        ]
+        models = [model["name"] for model in data.get("models", [])]
 
         logger.info(f"Available Models5: {models}")
 
         return models
-
-

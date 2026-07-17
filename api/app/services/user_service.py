@@ -6,9 +6,11 @@
 """
 
 from sqlalchemy.orm import Session
+
 from app.models.user import User
-from app.schemas.user import UserCreate, UserUpdate
 from app.repositories.user_repository import UserRepository
+from app.schemas.user import UserCreate, UserUpdate
+
 
 class UserService:
     """Userテーブルに対する業務ロジックを提供するサービス"""
@@ -17,54 +19,26 @@ class UserService:
         """Repositoryを初期化する"""
         self.repository = UserRepository()
 
-    def create(
-        self,
-        db: Session,
-        data: UserCreate
-    ) -> User:
+    def create(self, db: Session, data: UserCreate) -> User:
         """ユーザを登録する"""
 
         return self.repository.create(db, data)
-    
-    def get_all(
-            self,
-            db: Session
-    ) -> list[User]:
+
+    def get_all(self, db: Session) -> list[User]:
         """全ユーザを取得する"""
 
         return self.repository.find_all(db)
-    
-    def get(
-        self,
-        db: Session,
-        user_id: int
-    ) -> User | None:
+
+    def get(self, db: Session, user_id: int) -> User | None:
         """指定したユーザを取得する"""
-        return self.repository.find_by_id(
-            db,
-            user_id
-        )
-    
+        return self.repository.find_by_id(db, user_id)
+
     def update(
-        self,
-        db: Session,
-        user_id: int,
-        data: UserUpdate
+        self, db: Session, user_id: int, data: UserUpdate
     ) -> User | None:
         """ユーザ情報を更新する"""
-        return self.repository.update(
-            db,
-            user_id,
-            data
-        )
-    
-    def delete(
-        self,
-        db: Session,
-        user_id: int
-    ) -> bool:
+        return self.repository.update(db, user_id, data)
+
+    def delete(self, db: Session, user_id: int) -> bool:
         """ユーザを削除する"""
-        return self.repository.delete(
-            db,
-            user_id
-        )
+        return self.repository.delete(db, user_id)

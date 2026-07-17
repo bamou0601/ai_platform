@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 70
+target-version = "py314"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I"
+]

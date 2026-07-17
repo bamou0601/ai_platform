@@ -1,9 +1,9 @@
-# 
-# 機能: アプリケーションログ設定
-# ロジック: コンソールとファイルへログを出力するハンドラーを構成する
-# 作成者: 馬 猛
-# 作成日: 2026/07/2
-# 
+"""
+機能: アプリケーションログ設定
+ロジック: コンソールとファイルへログを出力するハンドラーを構成する
+作成者: 馬 猛
+作成日: 2026/7/2
+"""
 
 import logging
 import os
@@ -12,6 +12,16 @@ import sys
 from logging.handlers import RotatingFileHandler
 
 def setup_logger():
+    """
+    アプリケーションのログ設定を初期化する。
+
+    コンソール、通常ログファイル(app.log)、エラーログファイル(error.log)
+    のログハンドラーを構成し、ログレベル、出力形式、および
+    ログローテーション設定を適用する。
+
+    Returns:
+        None
+    """
     
     # ログディレクトリを作成（存在しない場合）
     os.makedirs("logs", exist_ok=True)
@@ -58,9 +68,6 @@ def setup_logger():
             error_handler  # エラーログ用のハンドラー
         ],
     )
- 
-    # # FastAPI のログレベルを設定
-    # logging.getLogger("uvicorn").setLevel(logging.INFO)
-    # logging.getLogger("uvicorn.access").setLevel(logging.INFO)
+
 
     

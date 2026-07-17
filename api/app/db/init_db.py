@@ -1,12 +1,15 @@
 """
 機能: データベースの初期化
 ロジック: ORMモデルからテーブルを作成する
+作成者: 馬 猛
+作成日: 2026/7/6
 """
 
 from app.db.base import Base
 from app.db.database import engine
 
-# Userモデルを読み込む
+# ORM モデルを読み込む
+# モデルを読み込むことで Base.metadata にテーブル情報が登録される
 import app.models
 
 def init_db():

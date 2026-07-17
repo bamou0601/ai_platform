@@ -6,7 +6,9 @@
 """
 
 from datetime import datetime
+
 from pydantic import BaseModel, ConfigDict
+
 
 class UserCreate(BaseModel):
     """
@@ -15,8 +17,10 @@ class UserCreate(BaseModel):
     クライアントから送信される
     名前とメールアドレスを受け取る。
     """
+
     name: str
     email: str
+
 
 class UserUpdate(BaseModel):
     """
@@ -25,8 +29,10 @@ class UserUpdate(BaseModel):
     指定したユーザーの
     名前とメールアドレスを更新する。
     """
+
     name: str
     email: str
+
 
 class UserResponse(BaseModel):
     """
@@ -34,6 +40,7 @@ class UserResponse(BaseModel):
     APIから返却する
     ユーザー情報を定義する。
     """
+
     id: int
     name: str
     email: str

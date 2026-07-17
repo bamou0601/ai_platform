@@ -3,44 +3,40 @@
 ロジック: Userごとの操作を管理する
 作成者: 馬 猛
 作成日: 2026/07/02
-修正日: 2026/07/10
 """
 
 from datetime import datetime
 
-from sqlalchemy import (
-    Column, 
-    Integer, 
-    String,
-    DateTime
-) 
+from sqlalchemy import Column, DateTime, Integer, String
 
 from app.db.base import Base
 
-class User(Base):
-    """ユーザーテーブル"""
 
+class User(Base):
+    """
+    ユーザー情報を管理するORMモデル。
+
+    システムを利用するユーザーの基本情報
+    (ユーザー名、メールアドレス、作成日時)を管理する。
+
+    Attributes:
+        id (int):ユーザーID (主キー)
+        name (str):ユーザー名s
+        email (str):メールアドレス (一意)
+        created_at (datetime):レコード作成日時
+    """
+
+    # テーブル名
     __tablename__ = "users"
 
-    id = Column(
-        Integer,
-        primary_key=True,
-        index=True
-    )
+    # ユーザーID（主キー）
+    id = Column(Integer, primary_key=True, index=True)
 
-    name = Column(
-        String(100), 
-        nullable=False
-    )
+    # ユーザー名
+    name = Column(String(100), nullable=False)
 
+    # メールアドレス（一意）
+    email = Column(String(255), unique=True, nullable=False)
 
-    email = Column(
-        String(255), 
-        unique=True, 
-        nullable=False
-    )
-
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+    # レコード作成日時
+    created_at = Column(DateTime, default=datetime.utcnow)

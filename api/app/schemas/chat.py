@@ -9,7 +9,14 @@ from pydantic import BaseModel
 
 
 class ChatRequest(BaseModel):
-    """チャットリクエストの入力データ構造""" 
+    """
+    チャットリクエスト
+
+    ユーザーから送信されるチャット内容と、
+    利用するプロンプトテンプレートおよび
+    会話情報を受け取るリクエストスキーマ。
+    """
+
     user_id: int
 
     # 新規会話ならNone
@@ -18,7 +25,14 @@ class ChatRequest(BaseModel):
     message: str
     prompt_template_id: int
 
+
 class ChatResponse(BaseModel):
-    """チャットレスポンスの出力データ構造"""
+    """
+    チャットレスポンス
+
+    AIから生成された回答と、
+    対応する会話IDを返却するレスポンススキーマ。
+    """
+
     conversation_id: int
     answer: str

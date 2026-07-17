@@ -6,36 +6,49 @@
 """
 
 from datetime import datetime
-from pydantic import BaseModel
-from pydantic import ConfigDict
+
+from pydantic import BaseModel, ConfigDict
+
 
 class ConversationBase(BaseModel):
     """
-    会話登録時のリクエストスキーマ
-    会話タイトルとユーザーIDを受け取る。
+    Conversationの共通リクエストスキーマ。
+
+    Conversation登録およびレスポンスで共通して利用する
+    基本情報を定義する。
     """
+
     title: str
     user_id: int
 
 
 class ConversationCreate(ConversationBase):
+    """
+    Conversation登録時のリクエストスキーマ。
+    ConversationBaseの項目を利用して、
+    新しい会話を登録する。
+    """
+
     pass
 
 
 class ConversationUpdate(BaseModel):
     """
-    会話更新時のリクエストスキーマ
-
-    会話タイトルを更新する。
+    Conversation更新時のリクエストスキーマ。
+    既存の会話タイトルを更新する。
     """
+
     title: str
 
 
 class ConversationResponse(ConversationBase):
     """
-    会話取得時のレスポンススキーマ
-    APIから返却する会話情報を定義する。
+    Conversation取得時のレスポンススキーマ。
+
+    APIから返却するConversation情報を定義する。
+    SQLAlchemy ORMオブジェクトからの変換に対応する。
     """
+
     id: int
     title: str
     user_id: int
