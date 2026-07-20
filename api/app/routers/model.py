@@ -15,9 +15,7 @@ service = ModelService()
 
 
 @router.post("", response_model=ModelResponse)
-def create(
-    request: ModelCreate, db: Session = Depends(get_db)
-):
+def create(request: ModelCreate, db: Session = Depends(get_db)):
     return service.create(db, request)
 
 

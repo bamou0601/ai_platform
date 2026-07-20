@@ -2,7 +2,7 @@
 機能: UserテーブルのCRUD処理(業務ロジックを管理するクラス)
 ロジック: SQLAlchemyを利用してユーザー情報を操作する
 作成者: 馬 猛
-作成日: 2026/07/06
+作成日: 2026/7/6
 """
 
 from sqlalchemy.orm import Session

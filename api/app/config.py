@@ -2,7 +2,7 @@
 # 機能: アプリケーション設定の読み込み
 # ロジック: 環境変数から設定値を取得し、Settings インスタンスとして管理する
 # 作成者: 馬 猛
-# 作成日: 2026/07/2
+# 作成日: 2026/7/2
 #
 
 from pydantic_settings import BaseSettings
