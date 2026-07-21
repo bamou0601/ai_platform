@@ -28,6 +28,7 @@ from app.routers.conversation_message import (
 from app.routers.health import router as health_router
 from app.routers.model import router as model
 from app.routers.models import router as models_router
+from app.routers.openai import router as openai
 from app.routers.prompt_template import (
     router as prompt_template,
 )
@@ -98,3 +99,4 @@ app.include_router(
     conversation_message, tags=["Conversation Messages"]
 )
 app.include_router(model)
+app.include_router(openai)

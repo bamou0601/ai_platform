@@ -7,7 +7,6 @@ ChatCompletionResponse,ModelObject,ModelListResponse
 作成日: 2026/07/20
 """
 
-from datetime import datetime
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field

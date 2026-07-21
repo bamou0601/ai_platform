@@ -9,7 +9,11 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.db.dependencies import get_db
-from app.schemas.conversation import *
+from app.schemas.conversation import (
+    ConversationCreate,
+    ConversationResponse,
+    ConversationUpdate,
+)
 from app.services.conversation_service import ConversationService
 
 router = APIRouter(prefix="/conversations", tags=["Conversation"])
