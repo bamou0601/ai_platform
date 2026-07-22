@@ -32,6 +32,7 @@ from app.routers.openai import router as openai
 from app.routers.prompt_template import (
     router as prompt_template,
 )
+from app.routers.qdrant import router as qdrant
 from app.routers.users import router as users_router
 
 # ログの設定を初期化
@@ -100,3 +101,4 @@ app.include_router(
 )
 app.include_router(model)
 app.include_router(openai)
+app.include_router(qdrant)
