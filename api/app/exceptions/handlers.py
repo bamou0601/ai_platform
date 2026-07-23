@@ -7,13 +7,14 @@
 """
 
 import logging
-import requests
 
-from fastapi import FastAPI, Request, HTTPException
+import requests
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 
 # ロガーを取得
 logger = logging.getLogger(__name__)
+
 
 def register_exception_handlers(app: FastAPI):
     """
@@ -28,11 +29,10 @@ def register_exception_handlers(app: FastAPI):
     Returns:
         None
     """
-    
+
     @app.exception_handler(HTTPException)
     async def http_exception_handler(
-        request: Request,
-        exc: HTTPException
+        request: Request, exc: HTTPException
     ):
         """
         HTTPExceptionを処理する。
@@ -53,16 +53,12 @@ def register_exception_handlers(app: FastAPI):
         # エラーレスポンスを返却
         return JSONResponse(
             status_code=exc.status_code,
-            content={
-                "success": False,
-                "message": exc.detail
-            }
+            content={"success": False, "message": exc.detail},
         )
 
     @app.exception_handler(requests.exceptions.RequestException)
     async def request_exception_handler(
-        request: Request,
-        exc: requests.exceptions.RequestException
+        request: Request, exc: requests.exceptions.RequestException
     ):
         """
         Ollamaとの通信例外を処理する。
@@ -86,14 +82,13 @@ def register_exception_handlers(app: FastAPI):
             status_code=503,
             content={
                 "success": False,
-                "message": "Ollama service is unavailable."
-            }
+                "message": "Ollama service is unavailable.",
+            },
         )
 
     @app.exception_handler(Exception)
     async def generic_exception_handler(
-        request: Request,
-        exc: Exception
+        request: Request, exc: Exception
     ):
         """
         予期しない例外を処理する。
@@ -108,19 +103,15 @@ def register_exception_handlers(app: FastAPI):
         Returns:
             JSONResponse: エラー情報を含むJSONレスポンス
         """
-        
+
         # 例外が発生した場合の共通ハンドラー
         logger.exception("Unhandled Exception")
 
-        # 内部サーバーエラーレスポンスを返却 
+        # 内部サーバーエラーレスポンスを返却
         return JSONResponse(
             status_code=500,
             content={
                 "success": False,
-                "message": "Internal Server Error"
-            }
+                "message": "Internal Server Error",
+            },
         )
-    
-    
-
-

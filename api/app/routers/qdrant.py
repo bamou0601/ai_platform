@@ -10,12 +10,16 @@ from requests import RequestException
 
 from app.config import settings
 from app.schemas.document import (
+    DocumentSearchRequest,
+    DocumentSearchResponse,
     DocumentUpsertRequest,
     DocumentUpsertResponse,
 )
 from app.schemas.embedding import EmbeddingRequest, EmbeddingResponse
+from app.schemas.rag import RagChatRequest, RagChatResponse
 from app.services.document_service import DocumentService
 from app.services.embedding_service import EmbeddingService
+from app.services.rag_service import RagService
 from app.services.vector_service import VectorService
 from app.vector.qdrant_client import QdrantVectorClient
 
@@ -28,6 +32,7 @@ qdrant_client = QdrantVectorClient()
 vector_service = VectorService()
 embedding_service = EmbeddingService()
 document_service = DocumentService()
+rag_service = RagService()
 
 
 @router.get("")
@@ -133,6 +138,90 @@ def upsert_document(
         raise HTTPException(
             status_code=400,
             detail=str(exception),
+        ) from exception
+
+    except RuntimeError as exception:
+        raise HTTPException(
+            status_code=503,
+            detail=str(exception),
+        ) from exception
+
+
+@router.post(
+    "/documents/search",
+    response_model=DocumentSearchResponse,
+)
+def search_documents(
+    request: DocumentSearchRequest,
+) -> DocumentSearchResponse:
+    """
+    検索文に類似する文書をQdrantから取得する。
+
+    Args:
+        request: 類似文書検索リクエスト
+
+    Returns:
+        DocumentSearchResponse: 類似文書の検索結果
+
+    Raises:
+        HTTPException: 類似文書検索に失敗した場合
+    """
+    try:
+        return document_service.search_documents(
+            query=request.query,
+            limit=request.limit,
+            score_threshold=request.score_threshold,
+        )
+
+    except RequestException as exception:
+        raise HTTPException(
+            status_code=503,
+            detail="Failed to connect to the Ollama Embedding API.",
+        ) from exception
+
+    except ValueError as exception:
+        raise HTTPException(
+            status_code=400,
+            detail=str(exception),
+        ) from exception
+
+    except RuntimeError as exception:
+        raise HTTPException(
+            status_code=503,
+            detail=str(exception),
+        ) from exception
+
+
+@router.post(
+    "/rag/chat",
+    response_model=RagChatResponse,
+)
+def rag_chat(request: RagChatRequest) -> RagChatResponse:
+    """
+    関連文書を参照して質問への回答を生成する。
+
+    Args:
+        request: RAGチャットリクエスト
+
+    Returns:
+        RagChatResponse: 回答および参照文書
+
+    Raises:
+        HTTPException: RAGチャット処理に失敗した場合
+    """
+
+    try:
+        return rag_service.chat(
+            question=request.question,
+            limit=request.limit,
+            score_threshold=request.score_threshold,
+        )
+
+        # return RagChatResponse(**request.model_dump())
+
+    except ValueError as exception:
+        raise HTTPException(
+            status_code=400, detail=str(exception)
         ) from exception
 
     except RuntimeError as exception:

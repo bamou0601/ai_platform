@@ -138,3 +138,92 @@ class VectorRepository:
             settings.qdrant_collection,
             point_id,
         )
+
+    def search_similar(
+        self,
+        vector: list[float],
+        limit: int,
+        score_threshold: float | None = None,
+    ) -> list[dict[str, Any]]:
+        """
+        指定されたベクトルに類似する文書を検索する。
+
+        Args:
+            vector: 検索テキストから生成したEmbeddingベクトル
+            limit: 取得する検索結果の最大件数
+            score_threshold: 検索結果に含める最低類似度
+
+        Returns:
+            list[dict[str, Any]]: 類似文書の検索結果
+
+        Raises:
+            ValueError: 検索条件が不正な場合
+            RuntimeError: Qdrantでの検索に失敗した場合
+        """
+
+        if not vector:
+            raise ValueError("Search vector must not be empty.")
+
+        if len(vector) != settings.embedding_dimension:
+            raise ValueError(
+                "Search vector dimension does not match the configured "
+                "embedding dimension. "
+                f"expected={settings.embedding_dimension}, "
+                f"actual={len(vector)}"
+            )
+
+        if limit < 1:
+            raise ValueError(
+                "Search result limit must be greater than zero."
+            )
+
+        try:
+            logger.info(
+                "Searching similar documents in Qdrant. "
+                "collection=%s limit=%d score_threshold=%s",
+                settings.qdrant_collection,
+                limit,
+                score_threshold,
+            )
+
+            response = self.client.query_points(
+                collection_name=settings.qdrant_collection,
+                query=vector,
+                limit=limit,
+                score_threshold=score_threshold,
+                with_payload=True,
+                with_vectors=False,
+            )
+
+        except Exception as exception:
+            logger.exception(
+                "Failed to search similar documents in Qdrant. "
+                "collection=%s",
+                settings.qdrant_collection,
+            )
+
+            raise RuntimeError(
+                "Failed to search similar documents in Qdrant."
+            ) from exception
+
+        results: list[dict[str, Any]] = []
+
+        for point in response.points:
+            payload = point.payload or {}
+
+            results.append(
+                {
+                    "point_id": str(point.id),
+                    "score": float(point.score),
+                    "text": str(payload.get("text", "")),
+                    "source": payload.get("source"),
+                }
+            )
+        logger.info(
+            "Similar document search completed. "
+            "collection=%s result_count=%d",
+            settings.qdrant_collection,
+            len(results),
+        )
+
+        return results

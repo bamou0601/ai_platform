@@ -3,9 +3,10 @@
 ロジック: 会話管理、プロンプト取得、Ollamaとの対話、および会話履歴の保存を行う
 作成者: 馬 猛
 作成日: 2026/07/07
-修正日: 2026/07/21
+修正日: 2026/07/23
 """
 
+import logging
 from collections.abc import Iterator
 
 from fastapi import HTTPException
@@ -34,6 +35,9 @@ from app.services.conversation_message_service import (
 from app.services.conversation_service import (
     ConversationService,
 )
+from app.services.rag_service import RagService
+
+logger = logging.getLogger(__name__)
 
 
 class ChatService:
@@ -69,6 +73,9 @@ class ChatService:
         self.conversation_message_service = (
             ConversationMessageService()
         )
+
+        # rag Serviceを生成
+        self.rag_service = RagService()
 
     def chat(self, db: Session, request: ChatRequest) -> ChatResponse:
         """
@@ -169,10 +176,23 @@ class ChatService:
         Returns:
             ChatCompletionResponse:
                 OpenAI互換のチャットレスポンス
+
+        Raises:
+            ValueError: リクエスト内容が不正な場合
+            RuntimeError: チャット回答の生成に失敗した場合
         """
 
         # LLMへOpenAI互換リクエストを送信
-        return self.llm_service.chat(request)
+        # return self.llm_service.chat(request)
+
+        logger.info(
+            "Chat completion request received. stream=%s",
+            request.stream,
+        )
+
+        # RAG返信
+        processed_request = self._apply_rag(request)
+        return self.llm_service.chat(processed_request)
 
     def chat_completion_stream(
         self,
@@ -188,8 +208,17 @@ class ChatService:
         Returns:
             Iterator[str]: OpenAI互換SSEレスポンス
         """
-        return self.llm_service.chat_stream(
-            request,
+
+        # return self.llm_service.chat_stream(
+        #     request,
+        # )
+
+        # RAGコンテキストを追加する
+        processed_request = self._apply_rag(request)
+
+        # Ollamaからストリーミング応答を取得する
+        yield from self.llm_service.chat_stream(
+            processed_request,
         )
 
     def _get_or_create_conversation(
@@ -361,4 +390,41 @@ class ChatService:
                 prompt_tokens=0,
                 completion_tokens=completion_tokens,
             ),
+        )
+
+    def _apply_rag(
+        self,
+        request: ChatCompletionRequest,
+    ) -> ChatCompletionRequest:
+        """
+        チャットリクエストへRAGコンテキストを追加する。
+
+        Args:
+            request: 元のチャット補完リクエスト
+
+        Returns:
+            ChatCompletionRequest: RAG適用後のリクエスト
+        """
+        logger.info(
+            "Applying RAG context. stream=%s",
+            request.stream,
+        )
+
+        if not settings.rag_enabled:
+            logger.info("RAG is disabled.")
+            return request
+
+        logger.info(
+            "Applying RAG context to chat completion request."
+        )
+
+        rag_messages = self.rag_service.build_rag_messages(
+            request.messages,
+        )
+
+        # 元のリクエストを変更せずコピーを作成する
+        return request.model_copy(
+            update={
+                "messages": rag_messages,
+            }
         )

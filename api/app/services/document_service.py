@@ -9,7 +9,12 @@ from uuid import uuid4
 
 from app.config import settings
 from app.repositories.vector_repository import VectorRepository
-from app.schemas.document import DocumentUpsertResponse
+from app.schemas.document import (
+    DocumentSearchRequest,
+    DocumentSearchResponse,
+    DocumentSearchResult,
+    DocumentUpsertResponse,
+)
 from app.services.embedding_service import EmbeddingService
 
 
@@ -72,4 +77,58 @@ class DocumentService:
             success=True,
             point_id=point_id,
             collection_name=settings.qdrant_collection,
+        )
+
+    def search_documents(
+        self,
+        query: str,
+        limit: int = 3,
+        score_threshold: float | None = None,
+    ) -> DocumentSearchResponse:
+        """
+        検索文に類似する文書をQdrantから取得する。
+        Args:
+            query: 類似文書を検索するためのテキスト
+            limit: 取得する検索結果の最大件数
+            score_threshold: 検索結果に含める最低類似度
+        Returns:
+            DocumentSearchResponse: 類似文書の検索結果
+
+        Raises:
+            ValueError: 検索条件が不正な場合
+            RuntimeError: 類似検索に失敗した場合
+        """
+
+        normalized_query = query.strip()
+
+        if not normalized_query:
+            raise ValueError("Search query must not be empty.")
+
+        # 検索文からEmbeddingベクトルを生成する
+        query_vector = self.embedding_service.embed(
+            normalized_query,
+        )
+
+        # Qdrantから類似文書を取得する
+        search_results = self.vector_repository.search_similar(
+            vector=query_vector,
+            limit=limit,
+            score_threshold=score_threshold,
+        )
+
+        results = [
+            DocumentSearchResult(
+                point_id=result["point_id"],
+                score=result["score"],
+                text=result["text"],
+                source=result["source"],
+            )
+            for result in search_results
+        ]
+
+        return DocumentSearchResponse(
+            success=True,
+            query=normalized_query,
+            count=len(results),
+            results=results,
         )

@@ -8,6 +8,8 @@
 # from fastapi import Depends
 # from sqlalchemy.orm import Session
 # from app.db.session import get_db
+import logging
+
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 
@@ -18,6 +20,8 @@ from app.schemas.openai import (
 )
 from app.services.chat_service import ChatService
 from app.services.model_service import ModelService
+
+logger = logging.getLogger(__name__)
 
 # Routerを生成
 router = APIRouter(
@@ -32,11 +36,10 @@ model_service = ModelService()
 
 @router.post(
     "/chat/completions",
-    response_model=ChatCompletionResponse,
+    response_model=None,
 )
 def chat_completions(
     request: ChatCompletionRequest,
-    # db: Session = Depends(get_db),
 ) -> ChatCompletionResponse | StreamingResponse:
     """
     OpenAI互換チャットAPI。
@@ -51,7 +54,13 @@ def chat_completions(
         ChatCompletionResponse | StreamingResponse:
             OpenAI互換チャットレスポンス
     """
-    # ストリーミングレスポンスを返却
+
+    logger.info(
+        "Chat completion request received. stream=%s",
+        request.stream,
+    )
+
+    # ストリーミングレスポンスを返却する
     if request.stream:
         return StreamingResponse(
             chat_service.chat_completion_stream(
@@ -65,10 +74,8 @@ def chat_completions(
             },
         )
 
-    return chat_service.chat_completion(
-        # db=db,
-        request=request
-    )
+    # 通常レスポンスを返却する
+    return chat_service.chat_completion(request=request)
 
 
 @router.get(

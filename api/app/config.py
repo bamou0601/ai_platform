@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     # CORS
     allow_origins: str
 
-    # CORS
+    # PostgreSQL
     postgres_host: str
     postgres_port: int
     postgres_db: str
@@ -38,6 +38,11 @@ class Settings(BaseSettings):
     # Qdrant
     qdrant_url: str
     qdrant_collection: str
+
+    # RAG
+    rag_enabled: bool = True
+    rag_search_limit: int = 3
+    rag_score_threshold: float = 0.5
 
     class Config:
         """設定クラスの構成を定義する"""
