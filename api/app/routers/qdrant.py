@@ -23,11 +23,20 @@ from app.services.rag_service import RagService
 from app.services.vector_service import VectorService
 from app.vector.qdrant_client import QdrantVectorClient
 
+# Qdrant関連APIを「/qdrant」配下にまとめる
+# 例:
+# /qdrant
+# /qdrant/collection
+# /qdrant/documents
+# /qdrant/documents/search
+# /qdrant/rag/chat
 router = APIRouter(
     prefix="/qdrant",
     tags=["Qdrant"],
 )
 
+# Routerでは複雑な処理を直接実装せず、
+# 各ServiceやClientへ実際の処理を委譲する
 qdrant_client = QdrantVectorClient()
 vector_service = VectorService()
 embedding_service = EmbeddingService()
@@ -43,6 +52,8 @@ def health() -> dict[str, bool]:
     Returns:
         dict[str, bool]: 接続確認結果
     """
+    # QdrantClientからCollection一覧を取得できるか確認し、
+    # 接続可能であればTrueを返す
     return {
         "success": qdrant_client.health(),
     }
@@ -56,6 +67,10 @@ def create_collection() -> dict[str, bool]:
     Returns:
         dict[str, bool]: Collection作成結果
     """
+
+    # VectorServiceへCollection作成処理を依頼する
+    # Repository側で既存Collectionの有無を確認するため、
+    # 同じ名前のCollectionが存在しても重複作成されない
     vector_service.create_collection()
 
     return {"success": True}
@@ -82,8 +97,12 @@ def create_embedding(
     """
 
     try:
+        # 入力された文章をEmbeddingServiceへ渡し、
+        # OllamaのEmbeddingモデルからベクトルを生成する
         embedding = embedding_service.embed(request.text)
 
+        # 生成されたEmbeddingをAPIレスポンス形式へ変換して返す
+        # dimensionには実際に生成されたベクトルの要素数を設定する
         return EmbeddingResponse(
             model=settings.embedding_model,
             dimension=len(embedding),
@@ -91,12 +110,16 @@ def create_embedding(
         )
 
     except RequestException as exception:
+        # Ollamaへの接続失敗やタイムアウトなど、
+        # 外部Embedding APIとの通信に失敗した場合は503を返す
         raise HTTPException(
             status_code=503,
             detail="Ollama Embedding APIへ接続できません。",
         ) from exception
 
     except ValueError as exception:
+        # Embeddingレスポンスの形式や次元数など、
+        # データ内容に問題がある場合は500として返す
         raise HTTPException(
             status_code=500,
             detail=str(exception),
@@ -123,24 +146,36 @@ def upsert_document(
         HTTPException: 文書登録に失敗した場合
     """
     try:
+        # DocumentServiceへ文章とsourceを渡す
+        #
+        # Service内部では以下の処理を行う
+        # 1. 文章をEmbeddingへ変換
+        # 2. UUID形式のPoint IDを生成
+        # 3. Qdrantへvectorとpayloadを登録
         return document_service.upsert_document(
             text=request.text,
             source=request.source,
         )
 
     except RequestException as exception:
+        # Embedding生成時にOllamaへ接続できなかった場合は
+        # Service Unavailableとして503を返す
         raise HTTPException(
             status_code=503,
-            detail="Failed to connect to the Ollama Embedding API.",
+            detail="Ollama Embedding APIへ接続できません。",
         ) from exception
 
     except ValueError as exception:
+        # 空文字、ベクトル次元不一致など、
+        # 入力値に問題がある場合は400を返す
         raise HTTPException(
             status_code=400,
             detail=str(exception),
         ) from exception
 
     except RuntimeError as exception:
+        # Qdrantへの登録失敗など、
+        # 外部サービス側の処理に失敗した場合は503を返す
         raise HTTPException(
             status_code=503,
             detail=str(exception),
@@ -167,6 +202,12 @@ def search_documents(
         HTTPException: 類似文書検索に失敗した場合
     """
     try:
+        # DocumentServiceへ検索条件を渡す
+        #
+        # Service内部では以下の処理を行う
+        # 1. queryをEmbeddingへ変換
+        # 2. Qdrantで類似検索
+        # 3. score順に検索結果を取得
         return document_service.search_documents(
             query=request.query,
             limit=request.limit,
@@ -174,18 +215,24 @@ def search_documents(
         )
 
     except RequestException as exception:
+        # 検索用Embedding生成時に
+        # Ollamaへ接続できない場合は503を返す
         raise HTTPException(
             status_code=503,
-            detail="Failed to connect to the Ollama Embedding API.",
+            detail="Ollama Embedding APIへ接続できません。",
         ) from exception
 
     except ValueError as exception:
+        # queryが空、limitが不正など、
+        # 検索条件に問題がある場合は400を返す
         raise HTTPException(
             status_code=400,
             detail=str(exception),
         ) from exception
 
     except RuntimeError as exception:
+        # Qdrantへの接続失敗や検索処理失敗の場合は
+        # Service Unavailableとして503を返す
         raise HTTPException(
             status_code=503,
             detail=str(exception),
@@ -211,20 +258,30 @@ def rag_chat(request: RagChatRequest) -> RagChatResponse:
     """
 
     try:
+        # RagServiceへ質問と検索条件を渡す
+        #
+        # RagService内部では以下の処理を行う
+        # 1. 質問をEmbeddingへ変換
+        # 2. Qdrantから関連文書を検索
+        # 3. 検索結果をコンテキストとして整形
+        # 4. コンテキストと質問をOllamaへ送信
+        # 5. 回答と参照文書を返却
         return rag_service.chat(
             question=request.question,
             limit=request.limit,
             score_threshold=request.score_threshold,
         )
 
-        # return RagChatResponse(**request.model_dump())
-
     except ValueError as exception:
+        # 質問が空など、
+        # リクエスト内容に問題がある場合は400を返す
         raise HTTPException(
             status_code=400, detail=str(exception)
         ) from exception
 
     except RuntimeError as exception:
+        # 質問が空など、
+        # リクエスト内容に問題がある場合は400を返す
         raise HTTPException(
             status_code=503,
             detail=str(exception),

@@ -23,6 +23,11 @@ class QdrantVectorClient:
         Returns: None
         """
 
+        # .envからQdrantの接続先URLを取得し、
+        # Qdrantを操作するためのClientを生成する
+        #
+        # 例:
+        # QDRANT_URL=http://localhost:6333
         self.client = QdrantClient(
             url=settings.qdrant_url,
         )
@@ -31,9 +36,14 @@ class QdrantVectorClient:
         """
         QdrantClientを取得する。
 
+        RepositoryなどからQdrantを操作するときに使用する。
+
         Returns:
-            QdrantClient
+            QdrantClient:
+                初期化済みのQdrantClient
         """
+
+        # __init__で生成したQdrantClientを呼び出し元へ返す
         return self.client
 
     def health(self) -> bool:
@@ -41,11 +51,18 @@ class QdrantVectorClient:
         Qdrantへ接続できるか確認する。
 
         Returns:
-            bool: 接続成功時True
+            bool: 接続成功時True、失敗時はFalse
         """
 
         try:
+            # Collection一覧を取得してQdrantとの通信を確認する
+            #
+            # 正常に取得できればQdrantへ接続できていると判断する
             self.client.get_collections()
+            # 例外が発生しなかったため接続成功
             return True
         except Exception:
+            # Qdrantが停止している場合や、
+            # URL・ポートなどの接続設定が間違っている場合は
+            # 例外が発生するため接続失敗としてFalseを返す
             return False

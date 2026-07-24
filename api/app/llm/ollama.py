@@ -173,11 +173,13 @@ class OllamaService(LLMService):
                 OpenAI互換SSEレスポンス
         """
 
-        # レスポンス共通情報を生成
+        # レスポンス全体で共通して使用するIDと作成時刻を生成する
+        # ストリーミング中に返す複数のチャンクでも、
+        # 同じcompletion_idとcreatedを使用する
         completion_id = f"chatcmpl-{uuid.uuid4().hex}"
         created = int(time.time())
 
-        # Ollama向けリクエストを生成
+        # OpenAI互換リクエストをOllama向けの形式へ変換する
         payload = {
             "model": request.model,
             "messages": [
@@ -195,7 +197,8 @@ class OllamaService(LLMService):
             },
         }
 
-        # None値を除外
+        # Ollamaへ不要なNone値を送信しないため、
+        # 値が設定されているオプションだけを残す
         payload["options"] = {
             key: value
             for key, value in payload["options"].items()
@@ -206,16 +209,21 @@ class OllamaService(LLMService):
         logger.info("Model: %s", request.model)
 
         try:
-            # Ollamaへストリーミングリクエストを送信
+            # Ollamaへストリーミングリクエストを送信する
+            # stream=Trueを指定することで、
+            # 回答完了まで待たずに生成途中のデータを順次受信できる
             with requests.post(
                 f"{settings.ollama_url}/api/chat",
                 json=payload,
                 stream=True,
                 timeout=(10, None),
             ) as response:
+                # HTTPステータスが4xxまたは5xxの場合は例外を発生させる
+                # 正常な200系レスポンスの場合はそのまま次の処理へ進む
                 response.raise_for_status()
 
-                # assistantロールを最初のチャンクとして返却
+                # OpenAI互換のストリーミングでは、
+                # 最初にassistantロールだけを通知するチャンクを返す
                 role_chunk = {
                     "id": completion_id,
                     "object": "chat.completion.chunk",
@@ -234,20 +242,35 @@ class OllamaService(LLMService):
 
                 yield self._format_sse(role_chunk)
 
-                # OllamaのNDJSONを1行ずつ処理
+                # Ollamaは生成途中のレスポンスを
+                # NDJSON形式で1行ずつ返すため、
+                # 受信した行を順番に処理する
                 for line in response.iter_lines(
                     decode_unicode=True,
                 ):
+                    # 空行の場合は処理対象のデータが存在しないため、
+                    # JSON変換を行わず次の行へ進む
                     if not line:
                         continue
 
+                    # 1行分のJSON文字列をPythonのdictへ変換する
                     ollama_chunk = json.loads(line)
 
-                    # 生成途中のテキストを取得
+                    # Ollamaレスポンスのmessage.contentから、
+                    # 今回新しく生成されたテキスト部分を取得する
+                    #
+                    # messageやcontentが存在しない場合でも
+                    # エラーにならないように空文字を初期値として使用する
                     content = ollama_chunk.get("message", {}).get(
                         "content", ""
                     )
 
+                    # contentが空文字でない場合だけ、
+                    # OpenAI互換のストリーミングチャンクとして返却する
+                    #
+                    # Ollamaは生成完了通知など、
+                    # contentを持たないレスポンスを返す場合もあるため、
+                    # その場合はテキストチャンクを生成しない
                     if content:
                         content_chunk = {
                             "id": completion_id,
@@ -265,14 +288,30 @@ class OllamaService(LLMService):
                             ],
                         }
 
+                        # Pythonのyieldを使用することで、
+                        # すべての回答生成が完了するまで待たずに
+                        # Open WebUIへ少しずつ回答を返す
                         yield self._format_sse(content_chunk)
 
-                    # Ollamaの生成完了を処理
+                    # done=Trueは、
+                    # Ollama側で回答生成が完了したことを表す
+                    #
+                    # done=Falseの場合はまだ生成途中なので、
+                    # 次のNDJSONレスポンスを待つ
                     if ollama_chunk.get("done", False):
+                        # Ollama独自の終了理由を
+                        # OpenAI互換のfinish_reasonへ変換する
+                        #
+                        # 例:
+                        # "stop"   → "stop"
+                        # "length" → "length"
                         finish_reason = self._convert_finish_reason(
                             ollama_chunk.get("done_reason"),
                         )
 
+                        # 回答本文ではなく、
+                        # 「生成処理が終了した」ことを通知する
+                        # 最後のチャンクを作成する
                         finish_chunk = {
                             "id": completion_id,
                             "object": "chat.completion.chunk",
@@ -293,18 +332,27 @@ class OllamaService(LLMService):
                             "Streaming response completed.",
                         )
 
+                        # done=Trueになった時点でOllamaの回答生成は終了しているため、
+                        # これ以上レスポンスを読み続ける必要がない
+                        # forループを終了する
                         break
 
-                # OpenAI互換の終了通知
+                # OpenAI互換ストリーミングでは、
+                # 最後に[DONE]を送信して、
+                # クライアントへストリーム終了を通知する
                 yield "data: [DONE]\n\n"
 
         except requests.exceptions.RequestException:
+            # Ollamaへの接続失敗、タイムアウト、
+            # HTTPエラーなどの通信関連例外を処理する
             logger.exception(
                 "Failed to call Ollama streaming API.",
             )
             raise
 
         except json.JSONDecodeError:
+            # Ollamaから受信した1行が正しいJSON形式でない場合に処理する
+            # 想定外のレスポンス形式や破損データの調査に利用する
             logger.exception(
                 "Failed to parse Ollama streaming response.",
             )
@@ -321,12 +369,16 @@ class OllamaService(LLMService):
         Returns:
             str: SSE形式の文字列
         """
-
+        # Pythonの辞書データをJSON文字列へ変換する
+        # ensure_ascii=Falseを指定することで、
+        # 日本語をUnicodeエスケープせず、そのまま出力する
         json_data = json.dumps(
             data,
             ensure_ascii=False,
         )
 
+        # SSEでは各データの先頭に「data: 」を付け、
+        # 最後に空行（改行2つ）を入れて1つのイベントとして送信する
         return f"data: {json_data}\n\n"
 
     @staticmethod
@@ -343,9 +395,13 @@ class OllamaService(LLMService):
             str: OpenAI互換の終了理由
         """
 
+        # 最大トークン数に到達して生成が終了した場合は、
+        # OpenAI互換形式の「length」を返す
         if done_reason == "length":
             return "length"
 
+        # 通常終了や終了理由が取得できない場合は、
+        # OpenAI互換形式の「stop」として扱う
         return "stop"
 
     def get_models(self) -> list[str]:

@@ -2,10 +2,11 @@
 機能: データベース接続設定
 ロジック: PostgreSQL 接続用の URL を生成し、SQLAlchemy の Engine を作成する
 作成者: 馬 猛
-作成日: 2026/7/6
+作成日: 2026/07/06
 """
 
 from sqlalchemy import create_engine
+
 from app.config import settings
 
 # PostgreSQL 接続用の URL を生成
@@ -22,5 +23,5 @@ DATABASE_URL = (
 engine = create_engine(
     DATABASE_URL,
     # 実行される SQL をログに出力（開発・デバッグ用）
-    echo=True
+    echo=True,
 )

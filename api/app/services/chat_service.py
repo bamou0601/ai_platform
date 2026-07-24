@@ -182,16 +182,20 @@ class ChatService:
             RuntimeError: チャット回答の生成に失敗した場合
         """
 
-        # LLMへOpenAI互換リクエストを送信
-        # return self.llm_service.chat(request)
-
+        # 通常チャットリクエストを受信したことをログへ記録する
+        # stream=Falseの場合は、回答生成完了後にJSON形式で返却する
         logger.info(
             "Chat completion request received. stream=%s",
             request.stream,
         )
 
-        # RAG返信
+        # RAGが有効な場合は、
+        # ユーザーの質問に関連する文書をQdrantから検索し、
+        # 検索結果をSystemメッセージとして追加する
         processed_request = self._apply_rag(request)
+
+        # RAG適用後のリクエストをLLMへ渡し、
+        # 回答生成が完了してからレスポンスを返す
         return self.llm_service.chat(processed_request)
 
     def chat_completion_stream(
@@ -209,14 +213,15 @@ class ChatService:
             Iterator[str]: OpenAI互換SSEレスポンス
         """
 
-        # return self.llm_service.chat_stream(
-        #     request,
-        # )
-
-        # RAGコンテキストを追加する
+        # ストリーミングの場合も通常チャットと同じように、
+        # LLMへ送信する前にRAGコンテキストを追加する
         processed_request = self._apply_rag(request)
 
-        # Ollamaからストリーミング応答を取得する
+        # Ollamaから生成途中の回答を順番に受け取り、
+        # OpenAI互換SSE形式としてそのまま呼び出し元へ返す
+        #
+        # yield fromを使用することで、
+        # 回答全体の生成完了を待たずに少しずつ返却できる
         yield from self.llm_service.chat_stream(
             processed_request,
         )
@@ -245,21 +250,30 @@ class ChatService:
             HTTPException:
                 指定されたConversationが存在しない場合
         """
-        # Conversation IDが指定されている場合
+        # conversation_idが指定されている場合は、
+        # 新しい会話を作成せず既存Conversationを利用する
         if request.conversation_id is not None:
+            # DBから指定されたConversationを取得する
             conversation = self.conversation_service.get(
                 db, request.conversation_id
             )
 
+            # 指定されたIDのConversationが存在しない場合は、
+            # 存在しない会話を継続できないため404を返す
             if conversation is None:
                 raise HTTPException(
                     status_code=404,
                     detail="Conversation not found",
                 )
 
+            # Conversationが見つかった場合はそのまま返す
             return conversation
 
-        # 新しいConversationを作成
+        # conversation_idが指定されていない場合は、
+        # 新しいConversationとして登録する
+        #
+        # titleにはユーザー入力の先頭30文字を使用し、
+        # 会話一覧で内容を判別しやすくする
         return self.conversation_service.create(
             db,
             ConversationCreate(
@@ -296,7 +310,8 @@ class ChatService:
             list[Message]:
                 OpenAI互換のメッセージ一覧
         """
-        # System Promptを先頭に追加
+        # LLMへ最初に渡すSystem Promptを追加する
+        # System PromptではAIの役割や回答方針などを指定する
         messages = [
             Message(
                 role="system",
@@ -304,14 +319,17 @@ class ChatService:
             )
         ]
 
-        # 過去の会話履歴を取得
+        # DBから現在のConversationに紐づく過去の会話履歴を取得する
         conversation_messages = (
             self.conversation_message_service.get_by_conversation(
                 db, conversation_id
             )
         )
 
-        # 過去の会話履歴を追加
+        # 過去の会話履歴を古い順にMessageへ変換して追加する
+        #
+        # これによりLLMは今回の質問だけでなく、
+        # それまでの会話内容もコンテキストとして参照できる
         for history in conversation_messages:
             messages.append(
                 Message(
@@ -320,7 +338,15 @@ class ChatService:
                 )
             )
 
-        # 今回のユーザー入力を追加
+        # 最後に今回入力されたユーザーメッセージを追加する
+        #
+        # System Prompt
+        # ↓
+        # 過去の会話履歴
+        # ↓
+        # 今回のユーザー入力
+        #
+        # という順番でLLMへ送信する
         messages.append(
             Message(
                 role="user",
@@ -366,7 +392,10 @@ class ChatService:
         Returns:
             None
         """
-        # ユーザー入力を保存
+        # ユーザーが入力したメッセージをDBへ保存する
+        #
+        # ユーザーメッセージでは入力トークン数を記録し、
+        # completion_tokensは使用しないため0にする
         self.conversation_message_service.create(
             db,
             ConversationMessageCreate(
@@ -379,7 +408,10 @@ class ChatService:
             ),
         )
 
-        # AI回答を保存
+        # LLMが生成した回答をDBへ保存する
+        #
+        # AI回答では出力トークン数を記録し、
+        # prompt_tokensは使用しないため0にする
         self.conversation_message_service.create(
             db,
             ConversationMessageCreate(
@@ -405,11 +437,21 @@ class ChatService:
         Returns:
             ChatCompletionRequest: RAG適用後のリクエスト
         """
+
+        # 通常応答かストリーミング応答かを
+        # デバッグ時に確認できるようログへ記録する
         logger.info(
             "Applying RAG context. stream=%s",
             request.stream,
         )
 
+        # RAG機能が無効の場合は、
+        # Qdrant検索を実行せず元のリクエストをそのまま返す
+        #
+        # .env:
+        # RAG_ENABLED=false
+        #
+        # の場合にこの分岐へ入る
         if not settings.rag_enabled:
             logger.info("RAG is disabled.")
             return request
@@ -418,11 +460,21 @@ class ChatService:
             "Applying RAG context to chat completion request."
         )
 
+        # ユーザーの最新質問をEmbeddingへ変換し、
+        # Qdrantから関連文書を検索する
+        #
+        # 取得した関連文書はRAG用Systemメッセージとして
+        # 元の会話メッセージへ追加される
         rag_messages = self.rag_service.build_rag_messages(
             request.messages,
         )
 
-        # 元のリクエストを変更せずコピーを作成する
+        # request.messagesを直接変更すると、
+        # 呼び出し元が保持している元のリクエストまで
+        # 意図せず変更される可能性がある
+        #
+        # model_copy()を使って新しいリクエストを作成し、
+        # messagesだけRAG適用後の内容へ置き換える
         return request.model_copy(
             update={
                 "messages": rag_messages,
